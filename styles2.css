@@ -66,7 +66,9 @@ nav ul li a.active img.nav-icon {
     filter: invert(31%) sepia(84%) saturate(1842%) hue-rotate(190deg) brightness(98%) contrast(101%);
 }
 
-
+nav {
+    z-index: 999;
+}
 main {
     width: 100%;
     text-align: center;
@@ -83,6 +85,7 @@ main {
     min-width: 600px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    z-index: 1;
 }
 
 .project > .project-card {
@@ -96,12 +99,11 @@ main {
     display: block; /* Make the link block-level to cover the entire card */
 }
 .project-content {
-    transition: color 0.4s, transform 0.2s;
+    transition: color 0.4s;
 }
 
 .project-card:hover .project-content {
     color: #007BFF;
-    transform: translateY(-5px);
 
 }
 h1 {

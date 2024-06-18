@@ -10,7 +10,9 @@ body {
     justify-content: center;
     height: 100vh;
 }
-
+nav {
+    z-index: 999;
+}
 header {
     width: 100%;
     background-color: #fff;
