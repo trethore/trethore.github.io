@@ -1,0 +1,126 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+header {
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    position: fixed;
+    top: 0;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+nav ul li {
+    margin: 0 15px;
+    display: flex;
+    align-items: center;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    transition: color 0.3s;
+}
+
+nav ul li a img.nav-icon {
+    margin-right: 8px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    width: 24px;
+    height: 24px;
+    transition: filter 0.3s;
+}
+
+nav ul li a:hover {
+    color: #007BFF;
+}
+
+nav ul li a:hover img.nav-icon {
+    filter: invert(31%) sepia(84%) saturate(1842%) hue-rotate(190deg) brightness(98%) contrast(101%);
+}
+
+nav ul li a.active {
+    color: #007BFF;
+}
+
+nav ul li a.active img.nav-icon {
+    filter: invert(31%) sepia(84%) saturate(1842%) hue-rotate(190deg) brightness(98%) contrast(101%);
+}
+
+main {
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+}
+
+.projects {
+    margin-top: 60px; /* Adjusted margin value */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.project-card {
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    margin-top:20px ;
+    margin-bottom:20px;
+    padding: 10px;
+    min-width: 400px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+.profile, .contact {
+    background-color: #fff; 
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+.contact {
+    padding: 40px;
+}
+
+.profile-img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+p {
+    font-size: 16px;
+    margin: 5px 0;
+}
