@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resolveur de Sudoku - Portfolio de Titouan Réthoré</title>
+    <link rel="stylesheet" href="../styles2.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="../index.html"><img src="../images/home-icon.png" class="nav-icon"> Accueil</a></li>
+                <li><a href="../projects.html" class="active"><img src="../images/projects-icon.png" class="nav-icon"> Projets</a></li>
+                <li><a href="../contact.html"><img src="../images/contact-icon.png" class="nav-icon"> Contact</a></li>
+                <li><a href="../CV-Titouan-Rethore.pdf" download><img src="../images/download-icon.png" class="nav-icon"> Mon CV</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="project">
+        <section class="project-card">
+            <h1>Resolveur de Sudoku</h1>
+            <h2>Compétence : Optimiser des applications informatiques</h2>
+        </section>
+        <section class="project-card">
+            <h2>Résumé</h2>
+            <p>
+                Après avoir conçu un Sudoku, nous nous sommes penchés sur diverses techniques de résolution. Tout d'abord, nous avons mis en œuvre la méthode des "singletons nus". Cette approche implique de repérer les chiffres possibles pour chaque case sur une grille donnée, puis de les stocker dans un tableau. Nous avons développé plusieurs fonctions et procédures pour effectuer ces opérations.<br><br>
+                
+                Par la suite, nous avons exploré la méthode de <strong> "backtracking" </strong>, l'une des plus couramment utilisées. Cette approche consiste à parcourir chaque case du Sudoku, en testant chaque valeur possible. Si une valeur convient, elle est assignée à la case. Sinon, on teste une autre valeur. Cette méthode est mise en œuvre de manière récursive, chaque appel de fonction faisant progresser vers la case suivante. L'exécution se termine lorsque chaque case est remplie, indiquant que toutes les possibilités ont été explorées.<br><br>
+                
+                Ensuite, nous avons cherché à améliorer les performances du backtracking, car les temps d'exécution étaient longs pour les grilles de grande taille. Nous avons donc repensé la structure de la grille en comptant le nombre de possibilités pour chaque case. Cette étape préliminaire nous a permis d'accélérer le processus de backtracking en sautant plus rapidement les cases et en résolvant ainsi les grilles plus rapidement qu'avec la première version.<br><br>
+                
+                Enfin, nous avons optimisé le code pour améliorer encore les temps d'exécution.</p>
+        </section>
+        <section class="project-card">
+            <h2>Compétences Apprises ou Améliorées</h2>
+            <p>Compétences : Utilisation d'algorithmes, Résolution de problèmes, Optimisation, Réflexion, Analyse</p>
+            <p>Langage(s) : C</p>
+        </section>
+    </main>
+</body>
+</html>
