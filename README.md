@@ -1,2 +1,3 @@
-# trethore.github.io
-My portfolio.
+# Portfolio
+
+Run with npm run dev
