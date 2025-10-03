@@ -24,12 +24,25 @@ export function ThemeToggle() {
     );
   }
 
+  const handleThemeChange = (checked: boolean) => {
+    const newTheme = checked ? 'dark' : 'light';
+
+    if (!document.startViewTransition) {
+      setTheme(newTheme);
+      return;
+    }
+
+    document.startViewTransition(() => {
+      setTheme(newTheme);
+    });
+  };
+
   return (
     <div className="flex items-center gap-2.5">
       <Sun className="h-[1.1rem] w-[1.1rem] text-foreground/70 dark:text-muted-foreground" />
       <Switch
         checked={theme === 'dark'}
-        onCheckedChange={(checked) => setTheme(checked ? 'dark' : 'light')}
+        onCheckedChange={handleThemeChange}
         aria-label="Toggle theme"
       />
       <Moon className="h-[1.1rem] w-[1.1rem] text-muted-foreground dark:text-foreground/70" />

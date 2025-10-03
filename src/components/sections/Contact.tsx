@@ -41,7 +41,7 @@ export default function Contact() {
   }, []);
 
   return (
-    <section ref={contactRef} className="min-h-screen flex items-center py-20">
+    <section id="contact" ref={contactRef} className="min-h-screen flex items-center py-20">
       <div className="container mx-auto px-4 max-w-2xl">
         <h2 className="text-4xl md:text-5xl font-bold mb-12 text-center">Get In Touch</h2>
         <Card className="contact-card">
