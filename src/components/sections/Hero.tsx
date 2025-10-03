@@ -2,51 +2,38 @@
 
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
-import { Button } from '@/components/ui/button';
+import dynamic from 'next/dynamic';
+
+const IconCloud = dynamic(() => import('@/components/IconCloud'), {
+  ssr: false,
+});
+
+const ANIMATION_CONFIG = {
+  greeting: {
+    opacity: 0,
+    x: 50,
+    duration: 1,
+    delay: 0.5,
+    ease: 'power3.out',
+  },
+  titleWords: {
+    opacity: 0,
+    y: 50,
+    duration: 1,
+    stagger: 0.1,
+    delay: 0.8,
+    ease: 'power3.out',
+  },
+} as const;
 
 export default function Hero() {
   const heroRef = useRef<HTMLElement>(null);
+  const globeRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      const titleChars = gsap.utils.toArray('.hero-title-char');
-
-      gsap.from(titleChars, {
-        opacity: 0,
-        y: 50,
-        rotationX: -90,
-        duration: 0.8,
-        stagger: 0.05,
-        ease: 'back.out(1.7)',
-      });
-
-      gsap.to(titleChars, {
-        y: -10,
-        duration: 2,
-        stagger: {
-          each: 0.1,
-          repeat: -1,
-          yoyo: true,
-        },
-        ease: 'sine.inOut',
-        delay: 1,
-      });
-
-      gsap.from('.hero-subtitle', {
-        opacity: 0,
-        y: 30,
-        duration: 1,
-        delay: 0.5,
-        ease: 'power3.out',
-      });
-
-      gsap.from('.hero-cta', {
-        opacity: 0,
-        scale: 0.8,
-        duration: 0.8,
-        delay: 0.8,
-        ease: 'elastic.out(1, 0.5)',
-      });
+      gsap.from('.hero-greeting', ANIMATION_CONFIG.greeting);
+      gsap.from('.hero-title-word', ANIMATION_CONFIG.titleWords);
     }, heroRef);
 
     return () => ctx.revert();
@@ -57,22 +44,30 @@ export default function Hero() {
       ref={heroRef}
       className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-b from-green-500/20 to-background dark:from-purple-500/20 dark:to-background"
     >
-      <div className="container mx-auto px-4 text-center -mt-24">
-        <h1 className="text-5xl md:text-7xl font-bold mb-6 inline-flex flex-wrap justify-center gap-x-2">
-          {['W', 'e', 'l', 'c', 'o', 'm', 'e', '\u00A0', 't', 'o', '\u00A0', 'M', 'y', '\u00A0', 'P', 'o', 'r', 't', 'f', 'o', 'l', 'i', 'o'].map((char, i) => (
-            <span key={i} className="hero-title-char inline-block">
-              {char}
-            </span>
-          ))}
-        </h1>
-        <p className="hero-subtitle text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-          I'm a creative developer crafting beautiful digital experiences
-        </p>
-        <div className="hero-cta flex gap-4 justify-center">
-          <Button size="lg">View My Work</Button>
-          <Button size="lg" variant="outline">
-            Get In Touch
-          </Button>
+      <div className="container mx-auto px-4">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="relative h-[500px] flex items-center justify-center" ref={globeRef}>
+            <IconCloud />
+          </div>
+
+          <div className="text-left space-y-6">
+            <div className="hero-greeting flex items-center gap-3 text-lg md:text-xl">
+              <span className="text-2xl">🇫🇷</span>
+              <span className="text-muted-foreground">Hi, I'm Titouan Réthoré</span>
+            </div>
+
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight">
+              <div className="hero-title-word text-glint mb-2">
+                SOFTWARE
+              </div>
+              <div className="hero-title-word text-glint mb-2">
+                ENGINEER
+              </div>
+              <div className="hero-title-word text-muted-foreground text-3xl md:text-4xl lg:text-5xl mt-4">
+                & JAVA ENTHUSIAST
+              </div>
+            </h1>
+          </div>
         </div>
       </div>
     </section>

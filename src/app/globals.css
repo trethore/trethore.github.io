@@ -76,6 +76,7 @@
   --sidebar-accent-foreground: oklch(0.25 0 0);
   --sidebar-border: oklch(0.90 0.01 130);
   --sidebar-ring: oklch(0.68 0.19 130);
+  --glint-highlight: oklch(0.42 0 0);
 }
 
 .dark {
@@ -110,6 +111,7 @@
   --sidebar-accent-foreground: oklch(0.90 0 0);
   --sidebar-border: oklch(0.30 0.05 285);
   --sidebar-ring: oklch(0.75 0.15 285);
+  --glint-highlight: oklch(0.67 0 0);
 }
 
 @layer base {
@@ -134,4 +136,47 @@
 
 .animate-underline {
   animation: underline 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.icon-cloud {
+  width: 100%;
+  margin: auto;
+}
+
+@media (max-width: 1024px) {
+  .icon-cloud {
+    width: 90%;
+  }
+}
+
+.icon-cloud-container {
+  opacity: 0;
+  transform: scale(0.3);
+}
+
+
+@keyframes glint {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.text-glint {
+  background: linear-gradient(
+    90deg,
+    currentColor 0%,
+    currentColor 40%,
+    var(--glint-highlight) 50%,
+    currentColor 60%,
+    currentColor 100%
+  );
+  background-size: 200% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: glint 5s ease-in-out infinite;
+  animation-delay: 1.5s;
 }
