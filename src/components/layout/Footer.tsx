@@ -3,7 +3,7 @@ import {getTranslations} from 'next-intl/server';
 
 const SOCIAL_LINKS = [
   {
-    href: 'https://linkedin.com/in/YOUR_LINKEDIN_USERNAME',
+    href: 'https://www.linkedin.com/in/titouan-rethore-1b83132bb/',
     labelKey: 'linkedin'
   },
   {

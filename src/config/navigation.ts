@@ -20,7 +20,7 @@ export const SOCIAL_LINKS: SocialLink[] = [
     icon: Github,
   },
   {
-    href: 'https://linkedin.com/in/YOUR_LINKEDIN_USERNAME',
+    href: 'https://www.linkedin.com/in/titouan-rethore-1b83132bb/',
     label: 'LinkedIn',
     icon: Linkedin,
   },

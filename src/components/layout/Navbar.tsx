@@ -51,18 +51,18 @@ export default function Navbar() {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 border-b border-border/40 backdrop-blur-sm">
       <div className="container mx-auto px-4">
-        <div className="flex h-16 items-center justify-between">
-          <div className="flex items-center">
-              <Link
-                href={`/${locale}`}
-                className="group flex flex-col justify-center whitespace-nowrap text-xl font-bold leading-none hover:text-primary transition-colors"
-              >
+        <div className="grid h-16 grid-cols-[1fr_auto_1fr] items-center">
+          <div className="flex items-center justify-start">
+            <Link
+              href={`/${locale}`}
+              className="group flex flex-col justify-center whitespace-nowrap text-xl font-bold leading-none hover:text-primary transition-colors"
+            >
               <span className="inline-block">Titouan Réthoré</span>
               <span className="mt-1 block h-1 w-0 bg-gradient-to-r from-primary/40 to-primary dark:from-primary/40 dark:to-primary animate-underline" />
             </Link>
           </div>
 
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center justify-center gap-8">
             {NAV_LINKS.map(({href, labelKey}) => (
               <a
                 key={href}
@@ -80,7 +80,7 @@ export default function Navbar() {
             ))}
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center justify-end gap-2">
             {SOCIAL_LINKS.map(({href, label, icon: Icon}) => (
               <Button
                 key={label}

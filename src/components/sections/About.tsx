@@ -49,9 +49,11 @@ export default function About() {
             <h2 className="text-4xl md:text-5xl font-bold mb-6">{t('about.title')}</h2>
             <p className="text-lg mb-6">{t('about.p1')}</p>
             <p className="text-lg mb-8">{t('about.p2')}</p>
-            <Button size="lg">
-              <FileText />
-              {t('about.resume')}
+            <Button size="lg" asChild>
+              <a href="/cv.pdf" download>
+                <FileText />
+                {t('about.resume')}
+              </a>
             </Button>
           </div>
           <div className="about-image bg-muted rounded-full aspect-square w-full max-w-sm mx-auto flex items-center justify-center shadow-2xl border-4 border-primary/20">
