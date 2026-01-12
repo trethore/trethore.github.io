@@ -1,12 +1,17 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import {useEffect, useState} from 'react';
 import Link from 'next/link';
-import { Button } from '@/components/ui/button';
-import { ThemeToggle } from './ThemeToggle';
-import { NAV_LINKS, SOCIAL_LINKS } from '@/config';
+import {useLocale, useTranslations} from 'next-intl';
+import {Button} from '@/components/ui/button';
+import {LocaleSwitcher} from './LocaleSwitcher';
+import {ThemeToggle} from './ThemeToggle';
+import {NAV_LINKS, SOCIAL_LINKS} from '@/config';
 
 export default function Navbar() {
+  const t = useTranslations();
+  const locale = useLocale();
+
   const [activeSection, setActiveSection] = useState('');
 
   useEffect(() => {
@@ -48,29 +53,27 @@ export default function Navbar() {
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center">
-            <Link
-              href="/"
-              className="group flex flex-col justify-center whitespace-nowrap text-xl font-bold leading-none hover:text-primary transition-colors"
-            >
+              <Link
+                href={`/${locale}`}
+                className="group flex flex-col justify-center whitespace-nowrap text-xl font-bold leading-none hover:text-primary transition-colors"
+              >
               <span className="inline-block">Titouan Réthoré</span>
               <span className="mt-1 block h-1 w-0 bg-gradient-to-r from-primary/40 to-primary dark:from-primary/40 dark:to-primary animate-underline" />
             </Link>
           </div>
 
           <div className="hidden md:flex items-center gap-8">
-            {NAV_LINKS.map(({ href, label }) => (
+            {NAV_LINKS.map(({href, labelKey}) => (
               <a
                 key={href}
                 href={href}
                 onClick={(e) => handleClick(e, href)}
                 className="flex flex-col justify-center whitespace-nowrap text-base font-medium leading-none text-foreground hover:text-primary transition-colors"
               >
-                <span className="inline-block">{label}</span>
+                <span className="inline-block">{t(labelKey)}</span>
                 <span
                   className={`mt-1 block h-1 bg-gradient-to-r from-primary/40 to-primary dark:from-primary/40 dark:to-primary transition-all duration-500 ease-in-out ${
-                    activeSection === href.replace('#', '')
-                      ? 'w-full'
-                      : 'w-0'
+                    activeSection === href.replace('#', '') ? 'w-full' : 'w-0'
                   }`}
                 />
               </a>
@@ -78,7 +81,7 @@ export default function Navbar() {
           </div>
 
           <div className="flex items-center gap-2">
-            {SOCIAL_LINKS.map(({ href, label, icon: Icon }) => (
+            {SOCIAL_LINKS.map(({href, label, icon: Icon}) => (
               <Button
                 key={label}
                 variant="ghost"
@@ -96,6 +99,8 @@ export default function Navbar() {
                 </a>
               </Button>
             ))}
+
+            <LocaleSwitcher />
 
             <div className="h-6 w-px bg-border mx-2" />
 

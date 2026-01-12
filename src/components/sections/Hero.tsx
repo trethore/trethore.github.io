@@ -1,9 +1,10 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
-import { gsap } from '@/lib/gsap';
+import {useEffect, useRef} from 'react';
 import dynamic from 'next/dynamic';
-import { ChevronDown } from 'lucide-react';
+import {useLocale, useTranslations} from 'next-intl';
+import {ChevronDown} from 'lucide-react';
+import {gsap} from '@/lib/gsap';
 
 const IconCloud = dynamic(() => import('@/components/IconCloud'), {
   ssr: false,
@@ -28,12 +29,17 @@ const ANIMATION_CONFIG = {
 } as const;
 
 export default function Hero() {
+  const t = useTranslations();
+  const locale = useLocale();
+
   const heroRef = useRef<HTMLElement>(null);
 
   const handleScrollDown = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     const element = document.getElementById('about');
-    if (!element) return;
+    if (!element) {
+      return;
+    }
 
     const offsetTop = element.offsetTop - 64;
     window.scrollTo({
@@ -65,19 +71,19 @@ export default function Hero() {
 
           <div className="text-left space-y-6">
             <div className="hero-greeting flex items-center gap-3 text-lg md:text-xl">
-              <span className="text-2xl">🇫🇷</span>
-              <span className="text-muted-foreground">Hi, I'm Titouan Réthoré</span>
+              <span className="text-2xl">{locale === 'fr' ? '🇫🇷' : '🇬🇧'}</span>
+              <span className="text-muted-foreground">{t('hero.greeting')}</span>
             </div>
 
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight">
               <div className="hero-title-word text-glint mb-2">
-                SOFTWARE
+                {t('hero.titleLine1')}
               </div>
               <div className="hero-title-word text-glint mb-2">
-                ENGINEER
+                {t('hero.titleLine2')}
               </div>
               <div className="hero-title-word text-muted-foreground text-3xl md:text-4xl lg:text-5xl mt-4">
-                & JAVA ENTHUSIAST
+                {t('hero.subtitle')}
               </div>
             </h1>
           </div>
@@ -86,7 +92,7 @@ export default function Hero() {
         <a
           href="#about"
           onClick={handleScrollDown}
-          aria-label="Scroll to about section"
+          aria-label={t('hero.scrollAria')}
           className="absolute bottom-8 left-1/2 -translate-x-1/2 rounded-full border border-border/60 bg-background/40 p-2 text-foreground/70 backdrop-blur-sm transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 animate-scroll-hint"
         >
           <ChevronDown className="h-6 w-6" />

@@ -1,11 +1,14 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
-import { gsap } from '@/lib/gsap';
-import { Button } from '@/components/ui/button';
-import { FileText } from 'lucide-react';
+import {useEffect, useRef} from 'react';
+import {useTranslations} from 'next-intl';
+import {FileText} from 'lucide-react';
+import {Button} from '@/components/ui/button';
+import {gsap} from '@/lib/gsap';
 
 export default function About() {
+  const t = useTranslations();
+
   const aboutRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -43,22 +46,16 @@ export default function About() {
       <div className="mx-auto w-full px-4 lg:w-4/5">
         <div className="grid md:grid-cols-2 gap-12 items-start">
           <div className="about-content">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">About Me</h2>
-            <p className="text-lg mb-6">
-              I'm a passionate developer with expertise in creating modern web applications.
-              I love bringing ideas to life through clean code and beautiful design.
-            </p>
-            <p className="text-lg mb-8">
-              With a focus on user experience and performance, I strive to build products
-              that make a difference.
-            </p>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">{t('about.title')}</h2>
+            <p className="text-lg mb-6">{t('about.p1')}</p>
+            <p className="text-lg mb-8">{t('about.p2')}</p>
             <Button size="lg">
               <FileText />
-              RESUME
+              {t('about.resume')}
             </Button>
           </div>
           <div className="about-image bg-muted rounded-full aspect-square w-full max-w-sm mx-auto flex items-center justify-center shadow-2xl border-4 border-primary/20">
-            <p className="text-muted-foreground">Image Placeholder</p>
+            <p className="text-muted-foreground">{t('about.imagePlaceholder')}</p>
           </div>
         </div>
       </div>

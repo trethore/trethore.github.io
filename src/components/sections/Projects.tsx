@@ -1,12 +1,16 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
-import { gsap } from '@/lib/gsap';
-import { Badge } from '@/components/ui/badge';
-import { ExternalLink, Github } from 'lucide-react';
-import { PROJECTS } from '@/config';
+import {useEffect, useRef} from 'react';
+import {useLocale, useTranslations} from 'next-intl';
+import {Github} from 'lucide-react';
+import {Badge} from '@/components/ui/badge';
+import {PROJECTS} from '@/config';
+import {gsap} from '@/lib/gsap';
 
 export default function Projects() {
+  const t = useTranslations();
+  const locale = useLocale();
+
   const projectsRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -45,62 +49,76 @@ export default function Projects() {
     <section id="projects" ref={projectsRef} className="min-h-screen py-20">
       <div className="mx-auto w-full px-4 lg:w-4/5">
         <h2 className="projects-title text-4xl md:text-5xl font-bold mb-16">
-          Featured Projects
+          {t('projects.title')}
         </h2>
-        <div className="projects-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 auto-rows-[280px] gap-4">
-          {PROJECTS.map((project) => (
-            <div
-              key={project.id}
-              className={`project-card group relative overflow-hidden rounded-lg border border-border bg-card transition-all duration-300 hover:shadow-2xl hover:scale-[1.02] ${
-                project.featured
-                  ? 'md:col-span-2 md:row-span-2 lg:col-span-2 lg:row-span-2'
-                  : 'md:col-span-1 md:row-span-1 lg:col-span-2 lg:row-span-1'
-              }`}
-            >
-              <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-50 group-hover:opacity-70 transition-opacity duration-300`} />
+        <div className="projects-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 auto-rows-[minmax(280px,_auto)] gap-4">
+          {PROJECTS.map((project) => {
+            const title = t(project.titleKey);
+            const description = t(project.descriptionKey);
 
-              <div className="relative h-full flex flex-col justify-between p-6">
-                <div>
-                  <h3 className="text-2xl font-bold mb-3 text-foreground">
-                    {project.title}
-                  </h3>
-                  <p className="text-muted-foreground mb-4 line-clamp-2">
-                    {project.description}
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {project.tags.map((tag) => (
-                      <Badge
-                        key={tag}
-                        variant="secondary"
-                        className="bg-background/80 backdrop-blur-sm"
-                      >
-                        {tag}
-                      </Badge>
-                    ))}
+            return (
+              <div
+                key={project.id}
+                className={`project-card group relative overflow-hidden rounded-lg border border-border bg-card transition-all duration-300 hover:shadow-2xl hover:scale-[1.02] ${
+                  project.featured
+                    ? 'md:col-span-2 md:row-span-2 lg:col-span-2 lg:row-span-2'
+                    : 'md:col-span-1 md:row-span-1 lg:col-span-2 lg:row-span-1'
+                }`}
+              >
+                <div
+                  className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-50 group-hover:opacity-70 transition-opacity duration-300`}
+                />
+
+                <div className="relative h-full flex flex-col justify-between p-6">
+                  <div>
+                    <h3 className="text-2xl font-bold mb-3 text-foreground">
+                      {title}
+                    </h3>
+                    <p className="text-muted-foreground mb-4">
+                      {description}
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {project.tags.map((tag) => {
+                        const tagTranslations: Record<string, string> = {
+                          '#Implement': '#réaliser',
+                          '#Fuzzy': '#flou',
+                          '#Patch': '#correctif',
+                          '#Optimize': '#optimiser',
+                          '#Market': '#marché',
+                          '#Administer': '#administrer',
+                          '#Manage': '#gérer',
+                          '#Collaborate': '#collaborer',
+                        };
+
+                        const displayTag = locale === 'fr' ? (tagTranslations[tag] ?? tag) : tag;
+
+                        return (
+                          <Badge
+                            key={tag}
+                            variant="secondary"
+                            className="bg-background/80 backdrop-blur-sm"
+                          >
+                            {displayTag}
+                          </Badge>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  <div className="flex gap-3 mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <a
+                      href={project.github}
+                      className="flex items-center gap-2 px-4 py-2 rounded-md bg-background/80 backdrop-blur-sm hover:bg-background transition-colors text-sm font-medium"
+                      aria-label={t('projects.viewOnGithub', {title})}
+                    >
+                      <Github className="w-4 h-4" />
+                      {t('projects.code')}
+                    </a>
                   </div>
                 </div>
-
-                <div className="flex gap-3 mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <a
-                    href={project.github}
-                    className="flex items-center gap-2 px-4 py-2 rounded-md bg-background/80 backdrop-blur-sm hover:bg-background transition-colors text-sm font-medium"
-                    aria-label={`View ${project.title} on GitHub`}
-                  >
-                    <Github className="w-4 h-4" />
-                    Code
-                  </a>
-                  <a
-                    href={project.demo}
-                    className="flex items-center gap-2 px-4 py-2 rounded-md bg-primary text-primary-foreground hover:bg-primary/90 transition-colors text-sm font-medium"
-                    aria-label={`View ${project.title} live demo`}
-                  >
-                    <ExternalLink className="w-4 h-4" />
-                    Demo
-                  </a>
-                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

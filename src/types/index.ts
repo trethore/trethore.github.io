@@ -2,13 +2,12 @@ import type { ComponentType } from 'react';
 
 export interface Project {
   id: number;
-  title: string;
-  description: string;
+  titleKey: string;
+  descriptionKey: string;
   tags: string[];
   featured: boolean;
   gradient: string;
   github: string;
-  demo: string;
 }
 
 export interface SocialLink {
@@ -19,7 +18,7 @@ export interface SocialLink {
 
 export interface NavLink {
   href: string;
-  label: string;
+  labelKey: string;
 }
 
 export interface AnimationConfig {

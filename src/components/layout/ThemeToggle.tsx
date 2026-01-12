@@ -1,13 +1,16 @@
 'use client';
 
-import { Moon, Sun } from 'lucide-react';
-import { useTheme } from 'next-themes';
-import { useEffect, useState } from 'react';
-import { Switch } from '@/components/ui/switch';
+import {Moon, Sun} from 'lucide-react';
+import {useTranslations} from 'next-intl';
+import {useTheme} from 'next-themes';
+import {useEffect, useState} from 'react';
+import {Switch} from '@/components/ui/switch';
 
 export function ThemeToggle() {
+  const t = useTranslations();
+
   const [mounted, setMounted] = useState(false);
-  const { theme, setTheme } = useTheme();
+  const {theme, setTheme} = useTheme();
 
   // useEffect only runs on the client, so now we can safely show the ui
   useEffect(() => {
@@ -43,7 +46,7 @@ export function ThemeToggle() {
       <Switch
         checked={theme === 'dark'}
         onCheckedChange={handleThemeChange}
-        aria-label="Toggle theme"
+        aria-label={t('theme.toggleAria')}
       />
       <Moon className="h-[1.1rem] w-[1.1rem] text-muted-foreground dark:text-foreground/70" />
     </div>

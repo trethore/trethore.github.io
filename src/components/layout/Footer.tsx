@@ -1,41 +1,39 @@
 import Link from 'next/link';
+import {getTranslations} from 'next-intl/server';
 
 const SOCIAL_LINKS = [
   {
     href: 'https://linkedin.com/in/YOUR_LINKEDIN_USERNAME',
-    label: 'linkedin',
+    labelKey: 'linkedin'
   },
   {
     href: 'https://github.com/trethore',
-    label: 'github',
-  },
+    labelKey: 'github'
+  }
 ] as const;
 
-export default function Footer() {
+export default async function Footer() {
+  const t = await getTranslations('footer');
   const currentYear = new Date().getFullYear();
 
   return (
     <footer className="border-t border-border/40 backdrop-blur-sm bg-muted/30 dark:bg-muted/50">
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
-          <div className="text-sm text-muted-foreground">
-            {currentYear}
-          </div>
+          <div className="text-sm text-muted-foreground">{currentYear}</div>
 
-          <div className="text-sm font-medium">
-            Titouan Réthoré
-          </div>
+          <div className="text-sm font-medium">Titouan Réthoré</div>
 
           <div className="flex items-center gap-4">
-            {SOCIAL_LINKS.map(({ href, label }) => (
+            {SOCIAL_LINKS.map(({href, labelKey}) => (
               <Link
-                key={label}
+                key={labelKey}
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sm text-muted-foreground hover:text-foreground transition-colors"
               >
-                {label}
+                {t(labelKey)}
               </Link>
             ))}
           </div>

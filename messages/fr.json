@@ -1,0 +1,81 @@
+{
+  "metadata": {
+    "title": "Titouan Réthoré - Portfolio",
+    "description": "Portfolio de Titouan Réthoré"
+  },
+  "nav": {
+    "about": "À propos",
+    "projects": "Projets",
+    "contact": "Contact"
+  },
+  "locale": {
+    "en": "English",
+    "fr": "Français",
+    "select": "Choisir la langue"
+  },
+  "hero": {
+    "greeting": "Salut, je suis Titouan Réthoré",
+    "titleLine1": "INGÉNIEUR",
+    "titleLine2": "LOGICIEL",
+    "subtitle": "& PASSIONNÉ DE JAVA",
+    "scrollAria": "Aller à la section à propos"
+  },
+  "about": {
+    "title": "À propos",
+    "p1": "Je suis un développeur passionné, spécialisé dans la création d'applications web modernes. J'aime donner vie aux idées grâce à un code propre et un design soigné.",
+    "p2": "Avec un focus sur l'expérience utilisateur et la performance, je cherche à construire des produits qui ont un vrai impact.",
+    "resume": "CV",
+    "imagePlaceholder": "Image (bientôt)"
+  },
+  "projects": {
+    "title": "Projets à la une",
+    "code": "Code",
+    "demo": "Démo",
+    "viewOnGithub": "Voir {title} sur GitHub",
+    "viewLiveDemo": "Voir la démo de {title}",
+    "items": {
+      "projectOne": {
+        "title": "My QOL Scripts Minecraft Mod",
+        "description": "My QOL Scripts (MQS) est un mod de scripting puissant, côté client, pour Minecraft 1.21.4 basé sur le mod loader Fabric. Il embarque un moteur JavaScript haute performance propulsé par GraalJS, permettant de créer des scripts complexes qui améliorent le gameplay via une API riche : gestion d’événements, commandes personnalisées, raccourcis clavier, gestion de configuration, et hooking de méthodes Java à l’exécution."
+      },
+      "projectTwo": {
+        "title": "Mend",
+        "description": "Appliquez des diffs désordonnés de façon interactive, en toute confiance. Mend est un outil en ligne de commande conçu pour appliquer des diffs de manière fiable, en particulier ceux générés par des modèles de langage (LLM)."
+      },
+      "projectThree": {
+        "title": "BlockTrack",
+        "description": "BlockTrack est une application web qui fournit un classement en temps réel de tokens de cryptomonnaies, triés par capitalisation boursière. Les utilisateurs authentifiés peuvent sélectionner et enregistrer leurs tokens favoris, explorer des informations détaillées (dont des graphiques historiques de prix), et gérer leur profil utilisateur."
+      },
+      "projectFour": {
+        "title": "Mon portfolio",
+        "description": "Portfolio personnel construit avec Next.js (App Router), React/TypeScript et Tailwind v4, avec i18n (next-intl), thème clair/sombre, primitives Radix UI et animations GSAP."
+      },
+      "projectFive": {
+        "title": "Crypto-Analysis",
+        "description": "Notre projet de groupe en R5C06 : Investotron 2000. Application Rust en mode TUI pour préparer, nettoyer et analyser des données OHLCVT Kraken afin de faciliter l'analyse et la prise de décision en matière d'investissement en cryptomonnaies."
+      },
+      "projectSix": {
+        "title": "SAE : Music Analysis",
+        "description": "Projet scolaire (SAE) : un système complet de recommandation musicale développé de zéro. Optimisation itérative des algorithmes de recommandation à travers plusieurs versions (dont des modèles de réseaux de neurones), appuyée par une base PostgreSQL avec un schéma optimisé. Le projet montre une amélioration systématique des performances, allant de recommandations textuelles basiques à un scoring de similarité multimodal avancé."
+      }
+    }
+  },
+  "contact": {
+    "title": "Contact",
+    "cardTitle": "Envoyez-moi un message",
+    "nameLabel": "Nom",
+    "namePlaceholder": "Votre nom",
+    "emailLabel": "Email",
+    "emailPlaceholder": "votre.email@exemple.com",
+    "messageLabel": "Message",
+    "messagePlaceholder": "Votre message...",
+    "submit": "Envoyer"
+  },
+  "footer": {
+    "linkedin": "LinkedIn",
+    "github": "GitHub"
+  },
+  "theme": {
+    "toggleAria": "Changer le thème"
+  }
+}

@@ -1,11 +1,14 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
-import { gsap } from '@/lib/gsap';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import {useEffect, useRef} from 'react';
+import {useTranslations} from 'next-intl';
+import {Button} from '@/components/ui/button';
+import {Card, CardContent, CardHeader, CardTitle} from '@/components/ui/card';
+import {gsap} from '@/lib/gsap';
 
 export default function Contact() {
+  const t = useTranslations();
+
   const contactRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -40,49 +43,49 @@ export default function Contact() {
   return (
     <section id="contact" ref={contactRef} className="min-h-screen flex items-center py-20">
       <div className="container mx-auto px-4 max-w-2xl">
-        <h2 className="text-4xl md:text-5xl font-bold mb-12 text-center">Get In Touch</h2>
+        <h2 className="text-4xl md:text-5xl font-bold mb-12 text-center">{t('contact.title')}</h2>
         <Card className="contact-card">
-          <CardHeader>
-            <CardTitle>Send me a message</CardTitle>
-          </CardHeader>
+            <CardHeader>
+              <CardTitle>{t('contact.cardTitle')}</CardTitle>
+            </CardHeader>
           <CardContent>
             <form className="contact-form space-y-6">
               <div className="form-field">
                 <label htmlFor="name" className="block text-sm font-medium mb-2">
-                  Name
+                  {t('contact.nameLabel')}
                 </label>
                 <input
                   id="name"
                   type="text"
-                  placeholder="Your name"
+                  placeholder={t('contact.namePlaceholder')}
                   className="w-full px-4 py-2 border rounded-md bg-background"
                 />
               </div>
               <div className="form-field">
                 <label htmlFor="email" className="block text-sm font-medium mb-2">
-                  Email
+                  {t('contact.emailLabel')}
                 </label>
                 <input
                   id="email"
                   type="email"
-                  placeholder="your.email@example.com"
+                  placeholder={t('contact.emailPlaceholder')}
                   className="w-full px-4 py-2 border rounded-md bg-background"
                 />
               </div>
               <div className="form-field">
                 <label htmlFor="message" className="block text-sm font-medium mb-2">
-                  Message
+                  {t('contact.messageLabel')}
                 </label>
                 <textarea
                   id="message"
                   rows={5}
-                  placeholder="Your message..."
+                  placeholder={t('contact.messagePlaceholder')}
                   className="w-full px-4 py-2 border rounded-md bg-background resize-none"
                 />
               </div>
               <div className="form-field">
                 <Button type="submit" size="lg" className="w-full">
-                  Send Message
+                  {t('contact.submit')}
                 </Button>
               </div>
             </form>

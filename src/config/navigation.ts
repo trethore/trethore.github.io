@@ -3,9 +3,9 @@ import { Github, Linkedin } from 'lucide-react';
 import { DiscordIcon } from '@/components/icons/DiscordIcon';
 
 export const NAV_LINKS: NavLink[] = [
-  { href: '#about', label: 'About Me' },
-  { href: '#projects', label: 'Featured Projects' },
-  { href: '#contact', label: 'Get In Touch' },
+  {href: '#about', labelKey: 'nav.about'},
+  {href: '#projects', labelKey: 'nav.projects'},
+  {href: '#contact', labelKey: 'nav.contact'}
 ];
 
 export const SOCIAL_LINKS: SocialLink[] = [

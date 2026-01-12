@@ -14,7 +14,7 @@ High-level structure:
 
 - `src/app/`: Next.js routes, root layout, global styles.
   - `src/app/layout.tsx`: application shell (providers, layout).
-  - `src/app/page.tsx`: main landing page.
+  - `src/app/[locale]/page.tsx`: main landing page (locale-aware).
   - `src/app/globals.css`: global styles and Tailwind layers.
 - `src/components/`: reusable React components.
   - `src/components/layout/`: layout-level components.
@@ -24,6 +24,10 @@ High-level structure:
 - `src/config/`: data/config used to drive the UI (navigation, projects).
 - `src/lib/`: shared utilities and integrations (e.g. `gsap` helpers, generic utils).
 - `src/types/`: shared TypeScript types.
+- `src/i18n/`: internationalization config (`routing.ts`, `request.ts`).
+- `messages/`: translation JSON files per locale (`en.json`, `fr.json`).
+  - keys are nested by feature/section (e.g. `nav.about`, `hero.greeting`, `projects.items.projectOne.title`).
+  - components use `useTranslations()` (client) or `getTranslations()` (server) from `next-intl`.
 - `public/`: static assets.
 
 ## Coding Conventions
