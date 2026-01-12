@@ -1,12 +1,9 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { gsap } from '@/lib/gsap';
 import { Button } from '@/components/ui/button';
 import { FileText } from 'lucide-react';
-
-gsap.registerPlugin(ScrollTrigger);
 
 export default function About() {
   const aboutRef = useRef<HTMLElement>(null);

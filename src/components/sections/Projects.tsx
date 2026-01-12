@@ -1,75 +1,10 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { gsap } from '@/lib/gsap';
 import { Badge } from '@/components/ui/badge';
 import { ExternalLink, Github } from 'lucide-react';
-
-gsap.registerPlugin(ScrollTrigger);
-
-const projects = [
-  {
-    id: 1,
-    title: 'Project One',
-    description: 'A cutting-edge web application with modern features',
-    tags: ['React', 'Next.js', 'TypeScript'],
-    featured: true,
-    gradient: 'from-blue-500/20 to-purple-500/20',
-    github: '#',
-    demo: '#',
-  },
-  {
-    id: 2,
-    title: 'Project Two',
-    description: 'An innovative mobile-first platform',
-    tags: ['React Native', 'Firebase', 'Redux'],
-    featured: false,
-    gradient: 'from-emerald-500/20 to-teal-500/20',
-    github: '#',
-    demo: '#',
-  },
-  {
-    id: 3,
-    title: 'Project Three',
-    description: 'Full-stack e-commerce solution',
-    tags: ['Node.js', 'PostgreSQL', 'Stripe'],
-    featured: true,
-    gradient: 'from-orange-500/20 to-red-500/20',
-    github: '#',
-    demo: '#',
-  },
-  {
-    id: 4,
-    title: 'Project Four',
-    description: 'Real-time collaboration tool',
-    tags: ['WebSockets', 'Express', 'MongoDB'],
-    featured: false,
-    gradient: 'from-pink-500/20 to-rose-500/20',
-    github: '#',
-    demo: '#',
-  },
-  {
-    id: 5,
-    title: 'Project Five',
-    description: 'AI-powered analytics dashboard',
-    tags: ['Python', 'TensorFlow', 'React'],
-    featured: false,
-    gradient: 'from-violet-500/20 to-indigo-500/20',
-    github: '#',
-    demo: '#',
-  },
-  {
-    id: 6,
-    title: 'Project Six',
-    description: 'Beautiful design system and component library',
-    tags: ['Tailwind', 'Storybook', 'Figma'],
-    featured: false,
-    gradient: 'from-cyan-500/20 to-blue-500/20',
-    github: '#',
-    demo: '#',
-  },
-];
+import { PROJECTS } from '@/config';
 
 export default function Projects() {
   const projectsRef = useRef<HTMLElement>(null);
@@ -113,7 +48,7 @@ export default function Projects() {
           Featured Projects
         </h2>
         <div className="projects-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 auto-rows-[280px] gap-4">
-          {projects.map((project) => (
+          {PROJECTS.map((project) => (
             <div
               key={project.id}
               className={`project-card group relative overflow-hidden rounded-lg border border-border bg-card transition-all duration-300 hover:shadow-2xl hover:scale-[1.02] ${

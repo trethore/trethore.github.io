@@ -1,35 +1,10 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Github, Linkedin } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ThemeToggle } from './ThemeToggle';
-import { DiscordIcon } from '@/components/icons/DiscordIcon';
-
-const SOCIAL_LINKS = [
-  {
-    href: 'https://discord.com/users/YOUR_DISCORD_ID',
-    label: 'Discord',
-    icon: DiscordIcon,
-  },
-  {
-    href: 'https://github.com/trethore',
-    label: 'GitHub',
-    icon: Github,
-  },
-  {
-    href: 'https://linkedin.com/in/YOUR_LINKEDIN_USERNAME',
-    label: 'LinkedIn',
-    icon: Linkedin,
-  },
-] as const;
-
-const NAV_LINKS = [
-  { href: '#about', label: 'About Me' },
-  { href: '#projects', label: 'Featured Projects' },
-  { href: '#contact', label: 'Get In Touch' },
-] as const;
+import { NAV_LINKS, SOCIAL_LINKS } from '@/config';
 
 export default function Navbar() {
   const [activeSection, setActiveSection] = useState('');

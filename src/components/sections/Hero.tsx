@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
+import { gsap } from '@/lib/gsap';
 import dynamic from 'next/dynamic';
 
 const IconCloud = dynamic(() => import('@/components/IconCloud'), {
@@ -28,7 +28,6 @@ const ANIMATION_CONFIG = {
 
 export default function Hero() {
   const heroRef = useRef<HTMLElement>(null);
-  const globeRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -47,7 +46,7 @@ export default function Hero() {
     >
       <div className="container mx-auto px-4">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <div className="relative h-[500px] flex items-center justify-center" ref={globeRef}>
+          <div className="relative h-[500px] flex items-center justify-center">
             <IconCloud />
           </div>
 
