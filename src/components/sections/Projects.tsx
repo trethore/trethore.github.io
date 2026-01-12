@@ -56,10 +56,37 @@ export default function Projects() {
             const title = t(project.titleKey);
             const description = t(project.descriptionKey);
 
+            const clickUrl =
+              project.blogPostUrl ?? (project.github !== '#' ? project.github : undefined);
+
+            const openProject = () => {
+              if (!clickUrl) {
+                return;
+              }
+
+              window.open(clickUrl, '_blank', 'noopener,noreferrer');
+            };
+
             return (
               <div
                 key={project.id}
-                className={`project-card group relative overflow-hidden rounded-lg border border-border bg-card transition-all duration-300 hover:shadow-2xl hover:scale-[1.02] ${
+                role={clickUrl ? 'link' : undefined}
+                tabIndex={clickUrl ? 0 : undefined}
+                aria-label={clickUrl ? title : undefined}
+                onClick={clickUrl ? openProject : undefined}
+                onKeyDown={(e) => {
+                  if (!clickUrl) {
+                    return;
+                  }
+
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    openProject();
+                  }
+                }}
+                className={`project-card group relative overflow-hidden rounded-lg border border-border bg-card transition-all duration-300 hover:shadow-2xl hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 ${
+                  clickUrl ? 'cursor-pointer' : ''
+                } ${
                   project.featured
                     ? 'md:col-span-2 md:row-span-2 lg:col-span-2 lg:row-span-2'
                     : 'md:col-span-1 md:row-span-1 lg:col-span-2 lg:row-span-1'
@@ -106,14 +133,19 @@ export default function Projects() {
                   </div>
 
                   <div className="flex gap-3 mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <a
-                      href={project.github}
-                      className="flex items-center gap-2 px-4 py-2 rounded-md bg-background/80 backdrop-blur-sm hover:bg-background transition-colors text-sm font-medium"
-                      aria-label={t('projects.viewOnGithub', {title})}
-                    >
-                      <Github className="w-4 h-4" />
-                      {t('projects.code')}
-                    </a>
+                    {project.github !== '#' ? (
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        className="flex items-center gap-2 px-4 py-2 rounded-md bg-background/80 backdrop-blur-sm hover:bg-background transition-colors text-sm font-medium"
+                        aria-label={t('projects.viewOnGithub', {title})}
+                      >
+                        <Github className="w-4 h-4" />
+                        {t('projects.code')}
+                      </a>
+                    ) : null}
                   </div>
                 </div>
               </div>

@@ -8,6 +8,7 @@ export interface Project {
   featured: boolean;
   gradient: string;
   github: string;
+  blogPostUrl?: string;
 }
 
 export interface SocialLink {

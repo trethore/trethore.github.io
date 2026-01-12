@@ -1,6 +1,7 @@
 'use client';
 
 import {useEffect, useRef} from 'react';
+import Image from 'next/image';
 import {useTranslations} from 'next-intl';
 import {FileText} from 'lucide-react';
 import {Button} from '@/components/ui/button';
@@ -56,8 +57,15 @@ export default function About() {
               </a>
             </Button>
           </div>
-          <div className="about-image bg-muted rounded-full aspect-square w-full max-w-sm mx-auto flex items-center justify-center shadow-2xl border-4 border-primary/20">
-            <p className="text-muted-foreground">{t('about.imagePlaceholder')}</p>
+          <div className="about-image relative overflow-hidden rounded-full aspect-square w-full max-w-sm mx-auto shadow-2xl border-4 border-primary/20 bg-muted">
+            <Image
+              src="/titouan_rethore.webp"
+              alt="Titouan Réthoré"
+              fill
+              sizes="(min-width: 768px) 384px, 80vw"
+              className="object-cover"
+              priority
+            />
           </div>
         </div>
       </div>

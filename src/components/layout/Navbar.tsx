@@ -2,6 +2,7 @@
 
 import {useEffect, useState} from 'react';
 import Link from 'next/link';
+import {usePathname, useRouter} from 'next/navigation';
 import {useLocale, useTranslations} from 'next-intl';
 import {Button} from '@/components/ui/button';
 import {LocaleSwitcher} from './LocaleSwitcher';
@@ -11,6 +12,11 @@ import {NAV_LINKS, SOCIAL_LINKS} from '@/config';
 export default function Navbar() {
   const t = useTranslations();
   const locale = useLocale();
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const homeHref = `/${locale}`;
+  const isHome = pathname === homeHref;
 
   const [activeSection, setActiveSection] = useState('');
 
@@ -35,17 +41,39 @@ export default function Navbar() {
     return () => observer.disconnect();
   }, []);
 
-  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault();
-    const targetId = href.replace('#', '');
-    const element = document.getElementById(targetId);
-    if (element) {
-      const offsetTop = element.offsetTop - 64;
-      window.scrollTo({
-        top: offsetTop,
-        behavior: 'smooth',
-      });
+  const handleBrandClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (!isHome) {
+      return;
     }
+
+    e.preventDefault();
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  };
+
+  const handleSectionClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (!href.startsWith('#')) {
+      return;
+    }
+
+    const targetId = href.slice(1);
+
+    if (!isHome) {
+      e.preventDefault();
+      router.push(`${homeHref}${href}`);
+      return;
+    }
+
+    e.preventDefault();
+    const element = document.getElementById(targetId);
+    if (!element) {
+      return;
+    }
+
+    const offsetTop = element.offsetTop - 64;
+    window.scrollTo({
+      top: offsetTop,
+      behavior: 'smooth',
+    });
   };
 
   return (
@@ -54,7 +82,8 @@ export default function Navbar() {
         <div className="grid h-16 grid-cols-[1fr_auto_1fr] items-center">
           <div className="flex items-center justify-start">
             <Link
-              href={`/${locale}`}
+              href={homeHref}
+              onClick={handleBrandClick}
               className="group flex flex-col justify-center whitespace-nowrap text-xl font-bold leading-none hover:text-primary transition-colors"
             >
               <span className="inline-block">Titouan Réthoré</span>
@@ -63,21 +92,45 @@ export default function Navbar() {
           </div>
 
           <div className="hidden md:flex items-center justify-center gap-8">
-            {NAV_LINKS.map(({href, labelKey}) => (
-              <a
-                key={href}
-                href={href}
-                onClick={(e) => handleClick(e, href)}
-                className="flex flex-col justify-center whitespace-nowrap text-base font-medium leading-none text-foreground hover:text-primary transition-colors"
-              >
-                <span className="inline-block">{t(labelKey)}</span>
-                <span
-                  className={`mt-1 block h-1 bg-gradient-to-r from-primary/40 to-primary dark:from-primary/40 dark:to-primary transition-all duration-500 ease-in-out ${
-                    activeSection === href.replace('#', '') ? 'w-full' : 'w-0'
-                  }`}
-                />
-              </a>
-            ))}
+            {NAV_LINKS.map(({href, labelKey}) => {
+              const isSectionLink = href.startsWith('#');
+              const resolvedHref = isSectionLink ? href : `${homeHref}${href}`;
+              const isActive = isSectionLink
+                ? activeSection === href.slice(1)
+                : pathname === resolvedHref;
+
+              const linkClassName =
+                'flex flex-col justify-center whitespace-nowrap text-base font-medium leading-none text-foreground hover:text-primary transition-colors';
+
+              if (isSectionLink) {
+                return (
+                  <a
+                    key={href}
+                    href={href}
+                    onClick={(e) => handleSectionClick(e, href)}
+                    className={linkClassName}
+                  >
+                    <span className="inline-block">{t(labelKey)}</span>
+                    <span
+                      className={`mt-1 block h-1 bg-gradient-to-r from-primary/40 to-primary dark:from-primary/40 dark:to-primary transition-all duration-500 ease-in-out ${
+                        isActive ? 'w-full' : 'w-0'
+                      }`}
+                    />
+                  </a>
+                );
+              }
+
+              return (
+                <Link key={href} href={resolvedHref} className={linkClassName}>
+                  <span className="inline-block">{t(labelKey)}</span>
+                  <span
+                    className={`mt-1 block h-1 bg-gradient-to-r from-primary/40 to-primary dark:from-primary/40 dark:to-primary transition-all duration-500 ease-in-out ${
+                      isActive ? 'w-full' : 'w-0'
+                    }`}
+                  />
+                </Link>
+              );
+            })}
           </div>
 
           <div className="flex items-center justify-end gap-2">
