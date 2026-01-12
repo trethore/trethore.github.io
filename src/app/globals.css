@@ -170,6 +170,25 @@
   }
 }
 
+@keyframes scroll-hint {
+  0% {
+    transform: translateY(0);
+    opacity: 0.55;
+  }
+  50% {
+    transform: translateY(10px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 0.55;
+  }
+}
+
+.animate-scroll-hint {
+  animation: scroll-hint 1.6s ease-in-out infinite;
+}
+
 .text-glint {
   background: linear-gradient(
     90deg,

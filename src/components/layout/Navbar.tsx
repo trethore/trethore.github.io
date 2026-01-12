@@ -48,11 +48,12 @@ export default function Navbar() {
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center">
-            <Link href="/" className="text-xl font-bold hover:text-primary transition-colors relative group">
-              <span className="relative inline-block">
-                Titouan Réthoré
-                <span className="absolute -bottom-1 left-0 w-0 h-1 bg-gradient-to-r from-primary/40 to-primary dark:from-primary/40 dark:to-primary animate-underline" />
-              </span>
+            <Link
+              href="/"
+              className="group flex flex-col justify-center whitespace-nowrap text-xl font-bold leading-none hover:text-primary transition-colors"
+            >
+              <span className="inline-block">Titouan Réthoré</span>
+              <span className="mt-1 block h-1 w-0 bg-gradient-to-r from-primary/40 to-primary dark:from-primary/40 dark:to-primary animate-underline" />
             </Link>
           </div>
 
@@ -62,11 +63,11 @@ export default function Navbar() {
                 key={href}
                 href={href}
                 onClick={(e) => handleClick(e, href)}
-                className="relative text-base font-medium text-foreground hover:text-primary transition-colors"
+                className="flex flex-col justify-center whitespace-nowrap text-base font-medium leading-none text-foreground hover:text-primary transition-colors"
               >
-                {label}
+                <span className="inline-block">{label}</span>
                 <span
-                  className={`absolute -bottom-1 left-0 h-1 bg-gradient-to-r from-primary/40 to-primary dark:from-primary/40 dark:to-primary transition-all duration-500 ease-in-out ${
+                  className={`mt-1 block h-1 bg-gradient-to-r from-primary/40 to-primary dark:from-primary/40 dark:to-primary transition-all duration-500 ease-in-out ${
                     activeSection === href.replace('#', '')
                       ? 'w-full'
                       : 'w-0'

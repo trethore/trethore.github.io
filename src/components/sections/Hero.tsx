@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from '@/lib/gsap';
 import dynamic from 'next/dynamic';
+import { ChevronDown } from 'lucide-react';
 
 const IconCloud = dynamic(() => import('@/components/IconCloud'), {
   ssr: false,
@@ -29,6 +30,18 @@ const ANIMATION_CONFIG = {
 export default function Hero() {
   const heroRef = useRef<HTMLElement>(null);
 
+  const handleScrollDown = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const element = document.getElementById('about');
+    if (!element) return;
+
+    const offsetTop = element.offsetTop - 64;
+    window.scrollTo({
+      top: offsetTop,
+      behavior: 'smooth',
+    });
+  };
+
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.from('.hero-greeting', ANIMATION_CONFIG.greeting);
@@ -44,7 +57,7 @@ export default function Hero() {
       ref={heroRef}
       className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-b from-green-500/20 to-background dark:from-purple-500/20 dark:to-background"
     >
-      <div className="container mx-auto px-4">
+      <div className="mx-auto w-full px-4 lg:w-4/5">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="relative h-[500px] flex items-center justify-center">
             <IconCloud />
@@ -69,6 +82,15 @@ export default function Hero() {
             </h1>
           </div>
         </div>
+
+        <a
+          href="#about"
+          onClick={handleScrollDown}
+          aria-label="Scroll to about section"
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 rounded-full border border-border/60 bg-background/40 p-2 text-foreground/70 backdrop-blur-sm transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 animate-scroll-hint"
+        >
+          <ChevronDown className="h-6 w-6" />
+        </a>
       </div>
     </section>
   );

@@ -43,7 +43,7 @@ export default function Projects() {
 
   return (
     <section id="projects" ref={projectsRef} className="min-h-screen py-20">
-      <div className="container mx-auto px-4">
+      <div className="mx-auto w-full px-4 lg:w-4/5">
         <h2 className="projects-title text-4xl md:text-5xl font-bold mb-16">
           Featured Projects
         </h2>

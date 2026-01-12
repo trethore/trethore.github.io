@@ -40,7 +40,7 @@ export default function About() {
 
   return (
     <section id="about" ref={aboutRef} className="min-h-screen flex items-center py-20">
-      <div className="container mx-auto px-4">
+      <div className="mx-auto w-full px-4 lg:w-4/5">
         <div className="grid md:grid-cols-2 gap-12 items-start">
           <div className="about-content">
             <h2 className="text-4xl md:text-5xl font-bold mb-6">About Me</h2>
