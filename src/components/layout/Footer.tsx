@@ -20,11 +20,11 @@ export default async function Footer() {
     <footer className="border-t border-border/40 backdrop-blur-sm bg-muted/30 dark:bg-muted/50">
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
-          <div className="text-sm text-muted-foreground">{currentYear}</div>
+          <div className="flex-1 text-sm text-muted-foreground">{currentYear}</div>
 
           <div className="text-sm font-medium">Titouan Réthoré</div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex-1 flex items-center justify-end gap-4">
             {SOCIAL_LINKS.map(({href, labelKey}) => (
               <Link
                 key={labelKey}

@@ -50,7 +50,7 @@ export default function About() {
             <h2 className="text-4xl md:text-5xl font-bold mb-6">{t('about.title')}</h2>
             <p className="text-lg mb-6">{t('about.p1')}</p>
             <p className="text-lg mb-8">{t('about.p2')}</p>
-            <Button size="lg" asChild>
+            <Button size="lg" className="min-w-40" asChild>
               <a href="/cv.pdf" download>
                 <FileText />
                 {t('about.resume')}
