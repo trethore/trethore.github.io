@@ -10,7 +10,7 @@ export default function About() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Fade in on scroll
+      // fade in on scroll
       gsap.from('.about-content', {
         opacity: 0,
         y: 50,
@@ -23,7 +23,7 @@ export default function About() {
         },
       });
 
-      // Parallax effect on image placeholder
+      // parallax effect on image placeholder
       gsap.to('.about-image', {
         y: -50,
         scrollTrigger: {

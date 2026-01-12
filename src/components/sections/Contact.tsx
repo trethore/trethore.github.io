@@ -10,7 +10,7 @@ export default function Contact() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Fade in animation
+      // fade in animation
       gsap.from('.contact-card', {
         opacity: 0,
         y: 50,
@@ -21,7 +21,7 @@ export default function Contact() {
         },
       });
 
-      // Form elements animation
+      // form elements animation
       gsap.from('.form-field', {
         opacity: 0,
         x: -20,
