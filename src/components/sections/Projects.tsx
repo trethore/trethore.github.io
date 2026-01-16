@@ -19,31 +19,36 @@ export default function Projects() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.from('.projects-title', {
-        opacity: 0,
-        x: -30,
-        duration: 1,
-        ease: 'power3.out',
+      // create a timeline so title and cards animate in sequence
+      const tl = gsap.timeline({
         scrollTrigger: {
-          trigger: '.projects-title',
+          trigger: projectsRef.current,
           start: 'top 75%',
           toggleActions: 'play none none none',
         },
       });
 
-      gsap.from('.project-card', {
+      // title slides in first
+      tl.from('.projects-title', {
         opacity: 0,
-        y: 60,
-        duration: 0.9,
-        stagger: 0.15,
-        ease: 'power3.out',
-        clearProps: 'all',
-        scrollTrigger: {
-          trigger: '.projects-grid',
-          start: 'top 85%',
-          toggleActions: 'play none none none',
-        },
+        x: -30,
+        duration: 0.6,
+        ease: 'power2.out',
       });
+
+      // cards fade in immediately after, faster and with less stagger
+      tl.from(
+        '.project-card',
+        {
+          opacity: 0,
+          y: 30,
+          duration: 0.4,
+          stagger: 0.08,
+          ease: 'power2.out',
+          clearProps: 'all',
+        },
+        '-=0.3' // overlap with title animation ending
+      );
     }, projectsRef);
 
     return () => ctx.revert();

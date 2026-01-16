@@ -1,5 +1,6 @@
 'use client';
 
+import {useEffect, useState} from 'react';
 import {usePathname, useRouter} from 'next/navigation';
 import {useLocale, useTranslations} from 'next-intl';
 import {Button} from '@/components/ui/button';
@@ -43,6 +44,13 @@ export function LocaleSwitcher() {
   const router = useRouter();
   const pathname = usePathname();
 
+  const [mounted, setMounted] = useState(false);
+
+  // delay rendering until client-side to avoid radix id hydration mismatch
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   const handleLocaleChange = (newLocale: string) => {
     if (newLocale === currentLocale) {
       return;
@@ -57,6 +65,15 @@ export function LocaleSwitcher() {
 
     router.push(`/${newLocale}${normalizedPath}`);
   };
+
+  // render placeholder during ssr to avoid hydration mismatch from radix-generated ids
+  if (!mounted) {
+    return (
+      <Button variant="ghost" size="icon" aria-label={t('select')} disabled>
+        <span className="text-lg opacity-50">{FLAGS[currentLocale]}</span>
+      </Button>
+    );
+  }
 
   return (
     <DropdownMenu>
