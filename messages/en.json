@@ -33,6 +33,115 @@
     "demo": "Demo",
     "viewOnGithub": "View {title} on GitHub",
     "viewLiveDemo": "View {title} live demo",
+    "backToProjects": "Back to projects",
+    "sections": "Content coming soon...",
+    "content": {
+      "mqs": {
+        "whatIsThis": {
+          "title": "What is this?",
+          "p1": "My QOL Scripts (MQS) is a client-side scripting mod that brings the power of modern JavaScript to Minecraft. Think of it as a programmable extension layer that lets you customize your gameplay experience through scripts you can write, share, and manage entirely within the game.",
+          "p2": "Unlike traditional mods that require recompilation and JAR packaging, MQS scripts are simple JavaScript files that you can write in any text editor and drop into a folder. The mod discovers, loads, and manages these scripts dynamically, giving you immediate feedback without restarting the game."
+        },
+        "overview": {
+          "title": "Project Overview",
+          "intro": "MQS is architected around a modular system where each script is treated as a first-class module with an explicit lifecycle. The project is built entirely in Java 21 and leverages several advanced technologies to create a seamless scripting experience:",
+          "architectureAlt": "Architecture diagram showing the main components and their interactions",
+          "coreArchitecture": {
+            "title": "Core Architecture",
+            "intro": "The mod is organized into focused packages under net.me.*, each handling a specific aspect of the scripting platform:",
+            "scriptingEngine": "**Scripting Engine** (net.me.scripting): The heart of MQS, powered by GraalVM's GraalJS engine. It includes the ScriptDiscoverer that scans the scripts directory for @module(...) declarations, a ScriptContextManager that pools Graal contexts for optimal performance, and lifecycle management for enabling/disabling scripts.",
+            "eventSystem": "**Event System** (net.me.event): A custom event bus layered on top of Fabric hooks. The EventManager tracks per-phase listeners and bridges Fabric events through FabricEventAdapter, ensuring that events are properly isolated per RunningScript.",
+            "runtimeHooking": "**Runtime Hooking** (net.me.hooking): Powered by ByteBuddy, this system enables in-memory method interception at runtime. The HookManager installs a Java agent, resolves Yarn mappings to stable class names, and applies or removes hooks dynamically based on script requests.",
+            "userInterfaces": "**User Interfaces** (net.me.ui): A complete in-game GUI built on top of Minecraft's native rendering system, including a scripts menu, console, keybinds configuration, and settings screens.",
+            "commandSystem": "**Command System** (net.me.command): Registers custom client-side commands with the /mqs command tree, featuring argument parsing and tab-completion.",
+            "keybindManagement": "**Keybind Management** (net.me.keybinds): Allows scripts to register custom keybinds that can be reconfigured in-game, with full integration into Minecraft's keybind system.",
+            "configuration": "**Configuration** (net.me.config): A persistent configuration system that stores both global mod settings (mqs_config.json) and per-script configurations, with automatic saving and loading."
+          },
+          "techStack": {
+            "title": "Technology Stack",
+            "graalvm": "**GraalVM JavaScript**: ES2024-compliant JavaScript engine with high-performance JIT compilation",
+            "bytebuddy": "**ByteBuddy**: Runtime code generation for method hooking and Java class extension",
+            "fabric": "**Fabric API**: Minecraft modding framework providing game integration",
+            "yarn": "**Yarn Mappings**: Stable, human-readable class and method names for Minecraft",
+            "lombok": "**Lombok**: Reduces boilerplate code in Java classes"
+          }
+        },
+        "technical": {
+          "title": "Technical Implementation",
+          "discovery": {
+            "title": "Script Discovery and Loading",
+            "intro": "MQS uses a custom annotation-based discovery system. Scripts declare themselves with an @module annotation:",
+            "explanation": "The ScriptDiscoverer scans the myqolscripts/scripts directory, parses these annotations, and creates ScriptDescriptor objects that store metadata. When a script is enabled, a RunningScript instance is created with its own Graal context, isolating it from other scripts."
+          },
+          "javaInterop": {
+            "title": "Java Interoperability",
+            "intro": "One of MQS's most powerful features is its deep Java integration. Scripts can import Java classes, call methods, and even extend Minecraft classes using the stable Yarn mappings:",
+            "extend": "For advanced use cases, scripts can extend Java classes:"
+          },
+          "hooking": {
+            "title": "Runtime Method Hooking",
+            "intro": "The hooking system is built on ByteBuddy and allows scripts to intercept Java method calls at runtime. Hooks can be installed before or after method execution, with access to method arguments, return values, and the calling context:",
+            "useCase": "This enables powerful use cases like the included FullBright script, which hooks into Minecraft's gamma validation to bypass brightness limits."
+          },
+          "performance": {
+            "title": "Performance Considerations",
+            "intro": "Performance is a core design principle in MQS:",
+            "contextPooling": "**Context Pooling**: Graal contexts are expensive to create, so ScriptContextManager maintains a pool that's recycled when scripts are disabled.",
+            "selectiveRetransformation": "**Selective Retransformation**: ByteBuddy retransformation only occurs when hooks are actually installed, minimizing overhead.",
+            "threadSafety": "**Thread Safety**: All Minecraft-facing work is scheduled onto the client thread through McUtils to prevent race conditions.",
+            "lazyLoading": "**Lazy Class Loading**: Java classes accessed from scripts are loaded lazily via LazyJsClassHolder to reduce initialization time."
+          },
+          "security": {
+            "title": "Security",
+            "intro": "MQS implements a conservative security model by default:",
+            "classWhitelisting": "**Class Whitelisting**: ScriptingClassResolver restricts class access to whitelisted packages unless GlobalConfigManager.allowAllClasses is explicitly enabled.",
+            "isolatedContexts": "**Isolated Contexts**: Each script runs in its own Graal context, preventing scripts from interfering with each other.",
+            "controlledHooks": "**Controlled Hooks**: Hooks are automatically removed when scripts are disabled, ensuring clean state restoration."
+          }
+        },
+        "docs": {
+          "title": "Documentation & Usage",
+          "installation": {
+            "title": "Installation",
+            "step1": "Install Fabric Loader for Minecraft 1.21.4",
+            "step2": "Download Fabric API and My QOL Scripts from GitHub",
+            "step3": "Place both .jar files in your .minecraft/mods folder",
+            "step4": "Launch the game",
+            "jvmArgs": "For optimal performance, add these JVM arguments to enable GraalJS's high-speed JIT compiler:"
+          },
+          "firstScript": {
+            "title": "Creating Your First Script",
+            "intro": "Scripts go in .minecraft/myqolscripts/scripts/. Here's a simple example that sends a chat message when enabled:"
+          },
+          "inGame": {
+            "title": "In-Game Management",
+            "intro": "MQS provides a comprehensive in-game interface for managing scripts:",
+            "scriptsMenu": "**Scripts Menu** (default: F10): View all available scripts, enable/disable them, and access their configuration",
+            "console": "**Integrated Console**: Execute commands, view script output, and debug issues",
+            "keybinds": "**Keybinds Screen**: View and rebind keybinds registered by scripts",
+            "settings": "**Settings Screen**: Configure global mod options like class access and log redirection",
+            "consoleCommands": "The integrated console supports commands like:",
+            "cmdHelp": "help - List available commands",
+            "cmdList": "list - Show all discovered scripts and their status",
+            "cmdEnable": "enable <script> - Enable a specific script",
+            "cmdDisable": "disable <script> - Disable a specific script",
+            "cmdRefresh": "refresh - Reload scripts from disk",
+            "cmdSave": "save <script> - Save a script's configuration"
+          }
+        },
+        "opinion": {
+          "title": "Personal Opinion",
+          "intro": "Building MQS has been an incredible journey that pushed my understanding of several complex domains:",
+          "consoleAlt": "Screenshot showing the in-game console with output from running scripts",
+          "graalChallenge": "The biggest challenge was integrating a JavaScript engine into a Java application while maintaining performance and security. GraalVM's polyglot API made this possible, but learning to properly manage contexts, handle interop, and avoid memory leaks required deep understanding of both GraalJS and the JVM.",
+          "hookingChallenge": "The hooking system powered by ByteBuddy was another significant challenge. Java's built-in instrumentation API is powerful, but using it safely in a game environment where code needs to be hot-swapped and hooks must be cleanly removed is non-trivial. I spent considerable time ensuring that hooks are properly disposed and that the game remains stable even when scripts are poorly written.",
+          "architecture": "I'm particularly proud of the architecture's modularity. Each manager has a clear responsibility, and the facade pattern in ScriptingService provides a clean API for the UI and command systems without exposing implementation details. This separation makes the codebase maintainable and testable.",
+          "lifecycle": "The decision to use explicit lifecycles for scripts (enable/disable methods) rather than simple \"load on startup\" was deliberate. This gives scripts control over their initialization and cleanup, preventing resource leaks and allowing for better error handling.",
+          "future": "Looking forward, I'd like to improve the documentation, add more examples, and potentially create a marketplace where users can share scripts. The full potential of MQS is in its community, and I hope to see players creating innovative scripts that enhance everyone's Minecraft experience.",
+          "cta": "If you're interested in trying MQS or contributing, check out the GitHub repository. The mod is licensed under AGPLv3, and I'm happy to discuss alternative licensing for open-source projects that would benefit from the codebase."
+        }
+      }
+    },
     "items": {
       "projectOne": {
         "title": "My QOL Scripts Minecraft Mod",

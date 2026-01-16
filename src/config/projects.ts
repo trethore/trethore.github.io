@@ -3,6 +3,7 @@ import type { Project } from '@/types';
 export const PROJECTS: Project[] = [
   {
     id: 1,
+    slug: 'mqs',
     titleKey: 'projects.items.projectOne.title',
     descriptionKey: 'projects.items.projectOne.description',
     tags: ['#Minecraft', '#JavaScript', '#GraalJS', '#Java21', '#Implement'],
@@ -12,6 +13,7 @@ export const PROJECTS: Project[] = [
   },
   {
     id: 2,
+    slug: 'mend',
     titleKey: 'projects.items.projectTwo.title',
     descriptionKey: 'projects.items.projectTwo.description',
     tags: ['#Rust', '#LLMs', '#Fuzzy', '#Patch', '#Optimize'],
@@ -21,6 +23,7 @@ export const PROJECTS: Project[] = [
   },
   {
     id: 3,
+    slug: 'blocktrack',
     titleKey: 'projects.items.projectThree.title',
     descriptionKey: 'projects.items.projectThree.description',
     tags: ['#Crypto', '#Market', '#NestJs', '#TailwindCSS', '#Prisma', '#GraphQL', '#Administer'],
@@ -30,6 +33,7 @@ export const PROJECTS: Project[] = [
   },
   {
     id: 4,
+    slug: 'portfolio',
     titleKey: 'projects.items.projectFour.title',
     descriptionKey: 'projects.items.projectFour.description',
     tags: ['#gerer', '#NextJS', '#React', '#TypeScript', '#TailwindCSS', '#next-intl', '#RadixUI', '#GSAP'],
@@ -39,6 +43,7 @@ export const PROJECTS: Project[] = [
   },
   {
     id: 5,
+    slug: 'crypto-analysis',
     titleKey: 'projects.items.projectFive.title',
     descriptionKey: 'projects.items.projectFive.description',
     tags: ['#Crypto', '#Rust', '#TUI', '#Kraken', '#OHLCVT', '#DataCleaning', '#Analysis', '#CLI', '#Conduire'],
@@ -48,6 +53,7 @@ export const PROJECTS: Project[] = [
   },
   {
     id: 6,
+    slug: 'music-analysis',
     titleKey: 'projects.items.projectSix.title',
     descriptionKey: 'projects.items.projectSix.description',
     tags: ['#Python', '#MachineLearning', '#PostgreSQL', '#RecommendationSystem', '#Optimization', '#DataScience', '#SpotifyDataset', '#Scikit-learn', '#Collaborate'],

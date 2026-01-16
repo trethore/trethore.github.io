@@ -4,7 +4,7 @@ import { DiscordIcon } from '@/components/icons/DiscordIcon';
 
 export const NAV_LINKS: NavLink[] = [
   {href: '#about', labelKey: 'nav.about'},
-  {href: '/projects', labelKey: 'nav.projects'},
+  {href: '#projects', labelKey: 'nav.projects'},
   {href: '#contact', labelKey: 'nav.contact'}
 ];
 
