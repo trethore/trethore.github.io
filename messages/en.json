@@ -3,6 +3,14 @@
     "title": "Titouan Réthoré - Portfolio",
     "description": "Portfolio of Titouan Réthoré"
   },
+  "skills": {
+    "implement": "Implement",
+    "optimize": "Optimize",
+    "administer": "Administer",
+    "manage": "Manage",
+    "lead": "Lead",
+    "collaborate": "Collaborate"
+  },
   "tags": {
     "minecraft": "#Minecraft",
     "javascript": "#JavaScript",

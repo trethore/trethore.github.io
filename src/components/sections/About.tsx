@@ -14,7 +14,7 @@ export default function About() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // fade in on scroll
+      // fade in on scroll for content
       gsap.from('.about-content', {
         opacity: 0,
         y: 50,
@@ -27,14 +27,16 @@ export default function About() {
         },
       });
 
-      // parallax effect on image placeholder
-      gsap.to('.about-image', {
-        y: -50,
+      // fade in on scroll for image (matching the text animation)
+      gsap.from('.about-image', {
+        opacity: 0,
+        y: 50,
+        duration: 1,
         scrollTrigger: {
-          trigger: aboutRef.current,
-          start: 'top bottom',
-          end: 'bottom top',
-          scrub: true,
+          trigger: '.about-image',
+          start: 'top 80%',
+          end: 'bottom 20%',
+          toggleActions: 'play none none reverse',
         },
       });
     }, aboutRef);

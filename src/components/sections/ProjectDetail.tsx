@@ -111,6 +111,7 @@ function SectionRenderer({
 export default function ProjectDetail({ project }: ProjectDetailProps) {
   const t = useTranslations();
   const tTags = useTranslations('tags');
+  const tSkills = useTranslations('skills');
   const locale = useLocale();
   const containerRef = useRef<HTMLElement>(null);
 
@@ -176,21 +177,27 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
         {/* header: title */}
         <header className="project-header mb-8">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground">
-            {title}
+            <span className="inline-flex flex-col">
+              <span>{tSkills(project.skillKey)}</span>
+              <span className="h-1 w-full bg-gradient-to-r from-primary/40 to-primary" />
+            </span>
+            <span> : {title}</span>
           </h1>
         </header>
 
         {/* tags */}
         <div className="project-tags flex flex-wrap gap-2 mb-12">
-          {project.tagKeys.map((tagKey) => (
-            <Badge
-              key={tagKey}
-              variant="secondary"
-              className="bg-background/80 backdrop-blur-sm text-sm"
-            >
-              {tTags(tagKey)}
-            </Badge>
-          ))}
+          {[...project.tagKeys]
+            .sort((a, b) => tTags(a).localeCompare(tTags(b)))
+            .map((tagKey) => (
+              <Badge
+                key={tagKey}
+                variant="secondary"
+                className="bg-background/80 backdrop-blur-sm text-sm"
+              >
+                {tTags(tagKey)}
+              </Badge>
+            ))}
         </div>
 
         {/* main content / sections */}

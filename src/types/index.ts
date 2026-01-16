@@ -1,8 +1,11 @@
 import type { ComponentType } from 'react';
 
+export type SkillKey = 'implement' | 'optimize' | 'administer' | 'manage' | 'lead' | 'collaborate';
+
 export interface Project {
   id: number;
   slug: string;
+  skillKey: SkillKey;
   titleKey: string;
   descriptionKey: string;
   tagKeys: string[];

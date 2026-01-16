@@ -17,6 +17,26 @@ const FLAGS: Record<Locale, string> = {
   fr: '🇫🇷'
 };
 
+function stripLeadingLocales(pathname: string): string {
+  const segments = pathname.split('/').filter(Boolean);
+
+  while (segments.length > 0) {
+    const first = segments[0];
+
+    if (!locales.includes(first as Locale)) {
+      break;
+    }
+
+    segments.shift();
+  }
+
+  if (segments.length === 0) {
+    return '/';
+  }
+
+  return `/${segments.join('/')}`;
+}
+
 export function LocaleSwitcher() {
   const t = useTranslations('locale');
   const currentLocale = useLocale() as Locale;
@@ -31,11 +51,11 @@ export function LocaleSwitcher() {
     // persist preference in cookie
     document.cookie = `NEXT_LOCALE=${newLocale};path=/;max-age=31536000`;
 
-    // replace the locale prefix in the current path (e.g., /en/projects -> /fr/projects)
-    const pathWithoutLocale = pathname.replace(`/${currentLocale}`, '') || '/';
-    const newPath = `/${newLocale}${pathWithoutLocale}`;
+    // avoid depending on currentLocale since it can temporarily desync from the URL
+    const pathWithoutLocale = stripLeadingLocales(pathname);
+    const normalizedPath = pathWithoutLocale === '/' ? '' : pathWithoutLocale;
 
-    router.push(newPath);
+    router.push(`/${newLocale}${normalizedPath}`);
   };
 
   return (

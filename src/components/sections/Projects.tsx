@@ -1,10 +1,11 @@
 'use client';
 
-import {useEffect, useRef} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import Link from 'next/link';
 import {useLocale, useTranslations} from 'next-intl';
 import {Github} from 'lucide-react';
 import {Badge} from '@/components/ui/badge';
+import {ProjectTitle} from '@/components/ui/ProjectTitle';
 import {PROJECTS} from '@/config';
 import {gsap} from '@/lib/gsap';
 
@@ -14,6 +15,7 @@ export default function Projects() {
   const locale = useLocale();
 
   const projectsRef = useRef<HTMLElement>(null);
+  const [hoveredProjectId, setHoveredProjectId] = useState<number | null>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -67,6 +69,8 @@ export default function Projects() {
                     ? 'md:col-span-2 md:row-span-2 lg:col-span-2 lg:row-span-2'
                     : 'md:col-span-1 md:row-span-1 lg:col-span-2 lg:row-span-1'
                 }`}
+                onMouseEnter={() => setHoveredProjectId(project.id)}
+                onMouseLeave={() => setHoveredProjectId(null)}
               >
                 <div
                   className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-50 group-hover:opacity-70 transition-opacity duration-300`}
@@ -75,21 +79,27 @@ export default function Projects() {
                 <div className="relative h-full flex flex-col justify-between p-6">
                   <div>
                     <h3 className="text-2xl font-bold mb-3 text-foreground">
-                      {title}
+                      <ProjectTitle
+                        skillKey={project.skillKey}
+                        title={title}
+                        isHovered={hoveredProjectId === project.id}
+                      />
                     </h3>
                     <p className="text-muted-foreground mb-4">
                       {description}
                     </p>
                     <div className="flex flex-wrap gap-2">
-                      {project.tagKeys.map((tagKey) => (
-                        <Badge
-                          key={tagKey}
-                          variant="secondary"
-                          className="bg-background/80 backdrop-blur-sm"
-                        >
-                          {tTags(tagKey)}
-                        </Badge>
-                      ))}
+                      {[...project.tagKeys]
+                        .sort((a, b) => tTags(a).localeCompare(tTags(b)))
+                        .map((tagKey) => (
+                          <Badge
+                            key={tagKey}
+                            variant="secondary"
+                            className="bg-background/80 backdrop-blur-sm"
+                          >
+                            {tTags(tagKey)}
+                          </Badge>
+                        ))}
                     </div>
                   </div>
 

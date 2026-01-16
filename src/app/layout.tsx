@@ -1,11 +1,6 @@
-import type {Metadata} from 'next';
 import {Inter, Fira_Code} from 'next/font/google';
 import './globals.css';
-import {NextIntlClientProvider} from 'next-intl';
-import {getLocale, getMessages, getTranslations} from 'next-intl/server';
 import {ThemeProvider} from '@/components/layout/ThemeProvider';
-import Navbar from '@/components/layout/Navbar';
-import Footer from '@/components/layout/Footer';
 
 const inter = Inter({
   variable: '--font-inter',
@@ -17,38 +12,22 @@ const firaCode = Fira_Code({
   subsets: ['latin']
 });
 
-export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations('metadata');
-
-  return {
-    title: t('title'),
-    description: t('description')
-  };
-}
-
-export default async function RootLayout({
+export default function RootLayout({
   children
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const locale = await getLocale();
-  const messages = await getMessages();
-
   return (
-    <html lang={locale} suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <body className={`${inter.variable} ${firaCode.variable} antialiased`}>
-        <NextIntlClientProvider locale={locale} messages={messages}>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <Navbar />
-            <main>{children}</main>
-            <Footer />
-          </ThemeProvider>
-        </NextIntlClientProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
