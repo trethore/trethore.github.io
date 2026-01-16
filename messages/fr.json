@@ -190,6 +190,307 @@
           "future": "Pour l'avenir, j'aimerais améliorer la documentation, ajouter plus d'exemples, et potentiellement créer une marketplace où les utilisateurs pourraient partager leurs scripts. Le plein potentiel de MQS réside dans sa communauté, et j'espère voir les joueurs créer des scripts innovants qui amélioreront l'expérience Minecraft de tous.",
           "cta": "Si vous êtes intéressé pour essayer MQS ou contribuer, consultez le dépôt GitHub. Le mod est sous licence AGPLv3, et je suis ouvert à discuter de licences alternatives pour les projets open-source qui bénéficieraient de la codebase."
         }
+      },
+      "mend": {
+        "whatIsThis": {
+          "title": "C'est quoi ?",
+          "p1": "Mend est un outil en ligne de commande conçu pour appliquer des diffs de manière fiable, en particulier ceux générés par des grands modèles de langage (LLMs). Là où les outils patch standard échouent à cause de numéros de ligne incorrects ou de contexte légèrement décalé, Mend excelle.",
+          "p2": "Il ignore les numéros de ligne et utilise un puissant moteur de correspondance floue combiné à un système interactif de résolution de conflits pour s'assurer que vos modifications atterrissent exactement où elles doivent. Pensez-y comme un utilitaire patch plus intelligent et plus tolérant, conçu pour l'ère de l'IA."
+        },
+        "overview": {
+          "title": "Vue d'ensemble du projet",
+          "intro": "Mend est entièrement construit en Rust pour la performance et la fiabilité. Il parse les fichiers diff, fait correspondre intelligemment les hunks à leurs emplacements cibles en utilisant plusieurs stratégies, et applique les changements en toute sécurité avec confirmation utilisateur si nécessaire.",
+          "features": {
+            "title": "Fonctionnalités clés",
+            "interactive": "**Résolution interactive des conflits** : Ne restez plus jamais bloqué sur un patch échoué. Si Mend ne trouve pas un emplacement parfait ou trouve plusieurs possibilités, il vous demande de choisir le bon emplacement, sauter le hunk, ou abandonner en toute sécurité.",
+            "ciMode": "**Compatible CI/Scripts** : Utilisez le flag --ci pour un mode non-interactif. Il échoue avec un code de sortie non nul en cas d'ambiguïté, parfait pour les workflows automatisés.",
+            "clipboard": "**Support Presse-papiers & Stdin** : Collez un diff directement depuis votre presse-papiers avec -c ou pipez-le depuis des outils comme git diff.",
+            "fuzzyMatching": "**Correspondance floue puissante** : Un algorithme multi-étapes trouve le bon emplacement même avec des changements de formatage, des lignes de contexte modifiées, ou du bruit induit par les LLMs.",
+            "gitDiff": "**Support complet Git Diff** : Gère de manière transparente les créations, suppressions et modifications de fichiers. Crée même automatiquement les répertoires parents pour les nouveaux fichiers.",
+            "robustParser": "**Parser robuste** : Ignore intelligemment les artefacts conversationnels, les headers malformés et autres déchets que les LLMs incluent parfois dans les blocs de code diff."
+          }
+        },
+        "technical": {
+          "title": "Implémentation technique",
+          "fuzzyLevels": {
+            "title": "Niveaux de correspondance floue",
+            "intro": "Mend fonctionne sur un principe simple mais puissant : faire confiance au contenu, pas aux coordonnées. La recherche se fait par étapes :",
+            "level0": "**Niveau 0 (Strict)** : Correspondance exacte, ligne par ligne. Le plus rapide et précis quand disponible.",
+            "level1": "**Niveau 1 (Insensible aux espaces)** : Ignore les espaces en début/fin et les lignes vides. Gère les différences de formatage mineures.",
+            "level2": "**Niveau 2 (Heuristique des points d'ancrage)** : Utilise les première et dernière lignes d'un bloc de changement comme ancres pour trouver l'emplacement, même si le contenu entre les deux a été modifié. Score les correspondances par similarité.",
+            "explanation": "Cette approche multi-niveaux signifie que Mend peut gérer tout, des patches impeccables aux sorties LLM fortement altérées, en retombant gracieusement à travers chaque niveau jusqu'à trouver une correspondance."
+          },
+          "architecture": {
+            "title": "Architecture du code",
+            "intro": "Le projet est organisé en modules focalisés :",
+            "parser": "**parser.rs** : Parse le format unified diff, gère les headers, hunks et extrait les métadonnées des fichiers. Robuste contre les entrées malformées.",
+            "diff": "**diff.rs** : Définit les structures de données centrales pour représenter les diffs, hunks et changements de lignes.",
+            "patcher": "**patcher.rs** : Le cœur de Mend—implémente l'algorithme de correspondance floue et applique les changements aux fichiers en toute sécurité.",
+            "error": "**error.rs** : Gestion complète des erreurs avec des messages descriptifs pour le débogage."
+          }
+        },
+        "usage": {
+          "title": "Guide d'utilisation",
+          "intro": "Mend est conçu pour être intuitif tout en offrant des options puissantes pour les cas d'usage avancés.",
+          "basicUsage": {
+            "title": "Utilisation de base",
+            "intro": "Les opérations les plus courantes sont simples :"
+          },
+          "advanced": {
+            "title": "Options avancées"
+          }
+        },
+        "interactive": {
+          "title": "Mode interactif",
+          "intro": "Quand un hunk de patch est ambigu ou ne peut pas être appliqué, Mend vous demande votre avis avec des options scorées :",
+          "explanation": "Chaque option montre le numéro de ligne et un score de similarité (0.0-1.0). Vous pouvez choisir le bon emplacement, sauter le hunk problématique, ou abandonner toute l'opération en toute sécurité."
+        },
+        "opinion": {
+          "title": "Mon avis personnel",
+          "intro": "Construire Mend est né d'une vraie frustration avec les outils patch existants lors du travail avec des changements de code générés par IA.",
+          "llmProblem": "Les LLMs sont incroyablement utiles pour générer des changements de code, mais ils produisent souvent des diffs avec des numéros de ligne incorrects, un contexte légèrement modifié, ou du texte conversationnel en plus. Les outils patch standard échouent simplement dans ces situations, vous laissant appliquer manuellement les changements—ce qui défait l'objectif de l'automatisation.",
+          "rustChoice": "J'ai choisi Rust pour ce projet car la fiabilité et la performance sont critiques. Quand vous appliquez des patches à votre codebase, vous avez besoin d'une confiance absolue que l'outil ne corrompra pas vos fichiers. Le système de types et les garanties de sécurité mémoire de Rust ont rendu cela beaucoup plus facile à atteindre.",
+          "fuzzyAlgorithm": "L'heuristique des points d'ancrage dans la correspondance Niveau 2 était l'innovation clé. En utilisant les première et dernière lignes comme ancres et en scorant le contenu entre les deux, Mend peut trouver des correspondances même quand les LLMs ont fait des modifications mineures aux lignes de contexte—quelque chose qui casse tous les autres outils patch que j'ai essayés.",
+          "future": "J'utilise Mend quotidiennement dans mon workflow, et je continue à l'améliorer basé sur des cas limites réels. L'objectif est d'en faire l'outil de référence pour quiconque travaille avec du coding assisté par IA."
+        }
+      },
+      "blocktrack": {
+        "whatIsThis": {
+          "title": "C'est quoi ?",
+          "p1": "BlockTrack est une application web full-stack qui fournit un classement en temps réel de tokens de cryptomonnaies triés par capitalisation boursière. Elle est conçue pour les passionnés de crypto qui veulent suivre le marché et gérer leurs tokens favoris.",
+          "p2": "Construite avec une stack technologique moderne et suivant les principes de Clean Architecture, BlockTrack démontre des patterns de niveau entreprise dans un contexte de projet personnel. Les utilisateurs peuvent s'authentifier, sauvegarder leurs favoris, explorer des métriques détaillées sur les tokens et visualiser des données de prix historiques."
+        },
+        "overview": {
+          "title": "Vue d'ensemble du projet",
+          "intro": "BlockTrack est architecturé comme un monorepo avec des applications frontend et backend séparées, communiquant via GraphQL. Le projet priorise le code propre, la séparation des responsabilités et une expérience utilisateur premium.",
+          "architectureAlt": "Diagramme d'architecture montrant la communication frontend-backend via GraphQL",
+          "features": {
+            "title": "Fonctionnalités principales",
+            "leaderboard": "**Classement temps réel** : Voir les tokens crypto triables par capitalisation, prix et variations en pourcentage (1h, 24h, 7j, 30j, 1an).",
+            "search": "**Recherche & Filtre** : Trouver rapidement des tokens par nom ou symbole avec des résultats instantanés.",
+            "favorites": "**Tokens favoris** : Les utilisateurs authentifiés peuvent sauvegarder leurs favoris et y accéder sur une page dédiée.",
+            "details": "**Détails des tokens** : Plongez dans n'importe quel token avec des statistiques de prix, infos de supply et graphiques historiques interactifs.",
+            "auth": "**Authentification utilisateur** : Inscription sécurisée, connexion, gestion de profil et suppression de compte.",
+            "responsive": "**Design responsive** : Interface entièrement responsive s'adaptant à toutes les tailles d'écran.",
+            "theme": "**Mode sombre/clair** : Basculez entre les thèmes pour un confort de lecture optimal."
+          },
+          "techStack": {
+            "title": "Stack technologique",
+            "frontendIntro": "**Frontend :**",
+            "react": "**React 19** avec Vite pour un développement ultra-rapide et HMR",
+            "vite": "**Vite** comme outil de build pour une expérience développeur optimale",
+            "apollo": "**Apollo Client** pour la gestion d'état GraphQL et le caching",
+            "tailwind": "**TailwindCSS** pour le styling utility-first",
+            "framer": "**Framer Motion** pour des animations fluides",
+            "recharts": "**Recharts** pour des graphiques de prix interactifs",
+            "backendIntro": "**Backend :**",
+            "nestjs": "**NestJS** comme framework Node.js de niveau entreprise",
+            "graphql": "**GraphQL** avec Apollo Server pour des requêtes API flexibles",
+            "prisma": "**Prisma** ORM avec SQLite pour un accès base de données type-safe",
+            "jwt": "**JWT** avec Passport.js pour une authentification sécurisée"
+          }
+        },
+        "architecture": {
+          "title": "Architecture en détail",
+          "intro": "BlockTrack suit la Clean Architecture de Uncle Bob pour promouvoir la séparation des responsabilités, la testabilité et la maintenabilité.",
+          "cleanArch": {
+            "title": "Couches Clean Architecture",
+            "intro": "Chaque couche a une responsabilité spécifique et ne dépend que des couches internes :",
+            "domain": "**Couche Domain** : Logique métier centrale, entités et interfaces de repository. Complètement indépendante des frameworks.",
+            "useCases": "**Couche Use Cases** : Règles métier spécifiques à l'application. Orchestre le flux de données entre domain et couches externes.",
+            "adapters": "**Interface Adapters** : Convertit les formats de données. Inclut les resolvers GraphQL, implémentations de repository et presenters.",
+            "frameworks": "**Frameworks & Drivers** : Dépendances externes comme NestJS, Prisma, React et Apollo."
+          }
+        },
+        "api": {
+          "title": "API GraphQL",
+          "intro": "Le backend expose une API GraphQL complète. Vous pouvez l'explorer via le GraphQL Playground à /graphql quand le serveur tourne.",
+          "queries": {
+            "title": "Requêtes principales"
+          },
+          "mutations": {
+            "title": "Mutations principales"
+          }
+        },
+        "opinion": {
+          "title": "Mon avis personnel",
+          "intro": "BlockTrack était un projet ambitieux qui m'a permis d'explorer des patterns d'architecture de niveau entreprise dans un contexte full-stack.",
+          "cleanArchChallenge": "Implémenter correctement la Clean Architecture était le plus grand défi. C'est facile de comprendre la théorie, mais l'appliquer de manière cohérente à travers frontend et backend demande de la discipline. Le retour sur investissement est une codebase genuinement facile à tester et étendre.",
+          "graphqlBenefits": "Choisir GraphQL plutôt que REST était une excellente décision. La flexibilité de demander exactement les données dont vous avez besoin, combinée au caching d'Apollo, rend le frontend beaucoup plus efficace. Le schema sert aussi de documentation vivante.",
+          "realTimeData": "Travailler avec des données crypto temps réel de CoinGecko m'a beaucoup appris sur les stratégies de caching, le rate limiting et la gestion gracieuse des échecs d'API externes. Le backend cache les données intelligemment pour minimiser les appels API tout en gardant les informations fraîches.",
+          "future": "Les améliorations futures incluent des tests complets, des fonctionnalités de suivi de portefeuille, des alertes de prix et potentiellement la containerisation avec Docker pour un déploiement plus facile."
+        }
+      },
+      "cryptoAnalysis": {
+        "whatIsThis": {
+          "title": "C'est quoi ?",
+          "p1": "Investotron 2000 est une application terminal (TUI) basée sur Rust pour l'analyse d'investissement en cryptomonnaies. Elle télécharge, nettoie et analyse des données historiques OHLCVT de Kraken pour aider les utilisateurs à prendre des décisions d'investissement éclairées.",
+          "p2": "Le projet implémente un modèle simplifié de moyenne-variance de Markowitz pour optimiser l'allocation de portefeuille sur plusieurs actifs crypto, offrant trois profils de risque : Bas, Moyen et Élevé."
+        },
+        "overview": {
+          "title": "Vue d'ensemble du projet",
+          "intro": "C'était un projet de groupe pour le cours R5C06. L'application fournit un pipeline complet du téléchargement des données brutes aux recommandations de portefeuille, le tout dans une interface terminal interactive.",
+          "tuiAlt": "Capture d'écran du terminal montrant le menu principal d'Investotron 2000",
+          "pipeline": {
+            "title": "Pipeline de données",
+            "intro": "L'application suit un pipeline en trois phases :",
+            "prepare": "**Préparer** : Téléchargement automatisé de l'archive OHLCVT de Kraken, vérification optionnelle du checksum et extraction vers data/raw.",
+            "clean": "**Nettoyer** : Sélection des paires USD uniquement, choix de la granularité la plus fine disponible, copie vers data/clean et exclusion des fichiers avec trop peu de points de données.",
+            "analyze": "**Analyser** : Optimisation de portefeuille moyenne-variance avec profils de risque, projections mensuelles et recommandations d'allocation."
+          }
+        },
+        "model": {
+          "title": "Modèle financier",
+          "intro": "Le projet implémente un modèle Markowitz simplifié, une pierre angulaire de la théorie moderne du portefeuille.",
+          "markowitz": {
+            "title": "Modèle moyenne-variance de Markowitz",
+            "intro": "Le modèle utilise des formules classiques pour l'optimisation de portefeuille :",
+            "returns": "**Rendements journaliers** : Calculés comme ln(P_t / P_t-1) utilisant les rendements logarithmiques pour de meilleures propriétés statistiques.",
+            "annualized": "**Métriques annualisées** : Moyenne et écart-type mis à l'échelle sur 365 jours pour une perspective annuelle.",
+            "portfolio": "**Statistiques de portefeuille** : Rendement pondéré et variance utilisant la matrice de covariance pour l'évaluation du risque.",
+            "projection": "**Projection mensuelle** : Formule de croissance composée pour projeter la valeur du portefeuille dans le temps."
+          },
+          "riskProfiles": {
+            "title": "Profils de risque",
+            "intro": "Le calcul des poids mélange des stratégies défensives (inverse de la volatilité) et offensives (proportionnelles à la volatilité) :",
+            "low": "**Risque Bas (blend=0.0)** : Poids purement inverse-volatilité, ciblant ~10% de volatilité annuelle. Concentre sur 2-3 actifs stables.",
+            "medium": "**Risque Moyen (blend=0.45)** : Mix 55% défensif / 45% offensif, ciblant ~40% de volatilité. Typiquement 6-10 positions.",
+            "high": "**Risque Élevé (blend=0.70)** : 30% défensif / 70% offensif, acceptant jusqu'à ~70% de volatilité annuelle pour un rendement attendu maximum."
+          }
+        },
+        "tui": {
+          "title": "Interface terminal",
+          "intro": "La TUI fournit plusieurs vues pour analyser votre portefeuille :",
+          "content": "**Onglet Content** : Composition détaillée du portefeuille avec pourcentages d'allocation pour chaque actif.",
+          "summary": "**Onglet Summary** : Montant investi, horizon, rendements attendus et métriques de volatilité.",
+          "graphs": "**Onglet Graphs** : Visualisation ASCII de la valeur projetée du portefeuille dans le temps.",
+          "advanced": "**Onglet Advanced** : Taille d'échantillon, drift annualisé, nombre d'actifs et information sur les paires exclues.",
+          "graphAlt": "Graphique terminal montrant la croissance projetée du portefeuille sur 12 mois"
+        },
+        "usage": {
+          "title": "Démarrage"
+        },
+        "opinion": {
+          "title": "Mon avis personnel",
+          "intro": "Construire Investotron 2000 a été une excellente expérience d'apprentissage combinant théorie financière et programmation système.",
+          "rustTui": "Créer une TUI en Rust était incroyablement satisfaisant. L'écosystème a considérablement mûri, et des bibliothèques comme ratatui rendent simple la construction d'applications terminal réactives et visuellement attrayantes.",
+          "mathModel": "Implémenter le modèle Markowitz from scratch a approfondi ma compréhension de la théorie du portefeuille. Traduire des formules mathématiques en code fonctionnel—gérant les cas limites, la stabilité numérique et les bizarreries des données réelles—est très différent des exemples de manuels.",
+          "teamwork": "C'était un projet de groupe, et coordonner le pipeline de données, le moteur financier et l'interface a demandé une bonne communication. Nous avons divisé clairement les responsabilités : gestion des données, moteur d'analytics et développement de l'interface.",
+          "limitations": "Le modèle a des limitations connues : pas de coûts de transaction, pas de gestion des valeurs manquantes dans les séries, et les métriques VaR/CVaR sont placeholder. Celles-ci sont documentées et seraient des extensions naturelles pour un travail futur."
+        }
+      },
+      "musicAnalysis": {
+        "whatIsThis": {
+          "title": "C'est quoi ?",
+          "p1": "SAE Music Analysis est un système complet de recommandation musicale construit from scratch comme projet scolaire. Il démontre le pipeline complet de data science, du nettoyage de données brutes à plusieurs algorithmes de recommandation, incluant des réseaux de neurones.",
+          "p2": "Le projet montre des améliorations de performance systématiques à travers les versions, des recommandations basiques sur texte à un scoring de similarité multi-modal sophistiqué utilisant les caractéristiques audio, les caractéristiques temporelles et les préférences utilisateur."
+        },
+        "overview": {
+          "title": "Vue d'ensemble du projet",
+          "intro": "C'était un projet majeur de SAE (Situation d'Apprentissage et d'Évaluation) impliquant plusieurs tracks et collaboration d'équipe. L'objectif était de construire une plateforme musicale complète avec analyse de données, conception de base de données et systèmes de recommandation.",
+          "tracks": {
+            "title": "Tracks du projet",
+            "t1": "**Track 1 - Analyse de données** : Nettoyage, validation et fusion de plusieurs datasets musicaux (tracks, artistes, albums, genres, caractéristiques audio).",
+            "t2": "**Track 2 - Base de données** : Conception de schéma PostgreSQL avec tables normalisées pour le domaine musical et les préférences utilisateur, tournant dans Docker.",
+            "t3": "**Track 3 - Recommandation** : Plusieurs algorithmes de recommandation incluant approches item-based, user-based et réseaux de neurones."
+          }
+        },
+        "database": {
+          "title": "Architecture de base de données",
+          "intro": "La base de données a été conçue pour supporter à la fois le catalogue musical et les interactions utilisateur, permettant diverses stratégies de recommandation.",
+          "schema": {
+            "title": "Conception du schéma",
+            "intro": "Le schéma PostgreSQL normalisé inclut :",
+            "track": "**track** : Métadonnées musicales centrales incluant titre, durée, flag explicit, compteurs d'écoutes et date de création.",
+            "artist": "**artist** : Informations artiste avec biographie, localisation, années d'activité et métriques de popularité.",
+            "album": "**album** : Détails d'album avec type, nombre de pistes, date de sortie et statistiques d'engagement.",
+            "audioFeature": "**audio_feature** : Caractéristiques audio type Spotify—acousticness, danceability, energy, instrumentalness, liveness, speechiness, tempo, valence.",
+            "temporalFeature": "**temporal_feature** : Analyse audio extensive incluant coefficients MFCC, caractéristiques spectrales, chroma et tonnetz (200+ caractéristiques par piste).",
+            "user": "**user/preference** : Comptes utilisateur avec préférences d'écoute détaillées et suivi du consentement.",
+            "features": "Le schéma supporte des tables de jonction pour les relations many-to-many (track-genre, track-artist, playlist-track) et des tables dédiées pour les rankings et licences."
+          }
+        },
+        "recommenders": {
+          "title": "Algorithmes de recommandation",
+          "intro": "Nous avons implémenté plusieurs approches de recommandation, chacune avec différents compromis et cas d'usage.",
+          "itemBased": {
+            "title": "Similarité audio Item-Based",
+            "intro": "Utilise les caractéristiques audio pour trouver des pistes similaires. Supporte la similarité pondérée combinant caractéristiques audio avec bruit aléatoire optionnel pour la diversité :"
+          },
+          "userBased": {
+            "title": "Filtrage collaboratif User-Based",
+            "intro": "Crée des vecteurs de préférence utilisateur à partir de l'historique d'écoute et trouve des utilisateurs similaires pour recommander les pistes qu'ils ont appréciées. Utilise la similarité cosinus sur les embeddings de préférence."
+          },
+          "neuralNetwork": {
+            "title": "Modèle réseau de neurones",
+            "intro": "Un MLP (Multi-Layer Perceptron) entraîné pour prédire les écoutes de pistes basé sur les caractéristiques audio :",
+            "training": "Le modèle utilise un split train-test 80/20 avec 10% de validation, SmoothL1Loss pour la robustesse aux outliers, et scheduling du learning rate pour la convergence."
+          }
+        },
+        "dataProcessing": {
+          "title": "Pipeline de traitement des données",
+          "intro": "Le Track 1 s'est concentré sur la préparation des données pour l'analyse et le peuplement de la base de données :",
+          "cleaning": "**Nettoyage** : Règles de validation dans globalrules.py, vérification des types et standardisation (normalisation de texte, formats de date).",
+          "validation": "**Validation** : Génération de CleanReport montrant les règles appliquées et les métriques de qualité des données.",
+          "merging": "**Fusion** : Jointure de clean_tracks.csv avec genres, albums, artistes et caractéristiques audio dans merged_tracks.csv.",
+          "visualization": "**Visualisation** : Génération automatique de graphiques pour l'exploration des données et le reporting."
+        },
+        "opinion": {
+          "title": "Mon avis personnel",
+          "intro": "Ce projet SAE a été l'une des expériences de data science les plus complètes que j'ai eues à l'école.",
+          "dataChallenge": "La phase de nettoyage des données m'a appris que 80% de la data science est de la préparation de données. Gérer des formats inconsistants, des valeurs manquantes et fusionner plusieurs sources demande une attention minutieuse aux détails.",
+          "iterativeApproach": "Nous avons itéré à travers plusieurs versions de recommandation, chacune améliorant la précédente. Commencer par du simple matching textuel, puis passer aux caractéristiques audio, et finalement aux réseaux de neurones a montré comment les améliorations incrémentales se composent.",
+          "teamCollaboration": "Travailler en équipe sur des tracks interconnectés (données, base de données, recommandations) a demandé une bonne coordination. Nous avons maintenu des interfaces claires entre les composants pour que chaque personne puisse travailler indépendamment.",
+          "learnings": "Le projet a renforcé le fait que les systèmes de recommandation dépendent autant de la qualité des données que de la sophistication des algorithmes. Un algorithme simple sur des données propres et bien structurées surpasse souvent des modèles complexes sur des données désordonnées."
+        }
+      },
+      "portfolio": {
+        "whatIsThis": {
+          "title": "C'est quoi ?",
+          "p1": "Ce site portfolio est un projet personnel présentant mon travail, mes compétences et mon approche du développement logiciel. Il est construit avec des technologies web modernes et sert à la fois de vitrine et de démonstration technique.",
+          "p2": "Le site propose une internationalisation complète (anglais/français), un support de thème sombre/clair, des animations fluides et un système de détail de projet style blog que vous lisez en ce moment."
+        },
+        "overview": {
+          "title": "Vue d'ensemble du projet",
+          "intro": "Construit avec Next.js 16 et l'App Router, ce portfolio met l'accent sur la performance, l'accessibilité et l'expérience développeur. Chaque composant est soigneusement conçu pour l'esthétique et la fonctionnalité.",
+          "techStack": {
+            "title": "Stack technologique",
+            "nextjs": "**Next.js 16** : App Router avec Turbopack pour un développement rapide et des builds production optimisés.",
+            "react": "**React 19** : Dernières fonctionnalités React incluant les Server Components et l'hydratation améliorée.",
+            "tailwind": "**Tailwind CSS v4** : Styling utility-first avec les améliorations de la dernière version.",
+            "nextIntl": "**next-intl** : Internationalisation robuste avec traductions type-safe.",
+            "radix": "**Radix UI** : Primitives accessibles et non-stylées pour menus dropdown, switches et tabs.",
+            "gsap": "**GSAP** : Animations de qualité professionnelle avec ScrollTrigger pour les effets basés sur le scroll.",
+            "nextThemes": "**next-themes** : Mode sombre/clair seamless avec détection des préférences système."
+          }
+        },
+        "features": {
+          "title": "Fonctionnalités clés",
+          "i18n": {
+            "title": "Internationalisation",
+            "intro": "Le site supporte l'anglais et le français avec un routing basé sur la locale (/en/..., /fr/...). Les traductions sont type-safe et organisées par fonctionnalité :"
+          },
+          "theming": {
+            "title": "Système de thème",
+            "intro": "Les thèmes sombre et clair sont implémentés avec next-themes, respectant les préférences système par défaut. Les variables CSS assurent une cohérence de thème à travers tous les composants, et le toggle fournit un basculement instantané sans scintillement."
+          },
+          "animations": {
+            "title": "Animations",
+            "intro": "GSAP propulse des animations fluides et performantes à travers le site. ScrollTrigger permet aux éléments de s'animer quand ils entrent dans le viewport :"
+          }
+        },
+        "structure": {
+          "title": "Structure du projet",
+          "intro": "La codebase suit les conventions Next.js avec une séparation claire des responsabilités :"
+        },
+        "opinion": {
+          "title": "Mon avis personnel",
+          "intro": "Construire mon propre portfolio a été un voyage continu de raffinement et d'apprentissage.",
+          "nextjsExperience": "Next.js 16 avec l'App Router représente le futur du développement React. Les Server Components, le streaming et Turbopack rendent le développement incroyablement rapide tout en produisant des builds production optimisés.",
+          "i18nChallenge": "Implémenter l'i18n correctement était plus complexe que prévu. Au-delà des chaînes de traduction, vous devez gérer la détection de locale, le routing, les métadonnées SEO, et vous assurer que la bonne langue charge au premier rendu sans scintillement.",
+          "designPhilosophy": "Je voulais un design professionnel mais pas générique. La combinaison de dégradés subtils, d'effets glassmorphism et d'animations réfléchies crée une sensation distinctive tout en restant accessible et performant.",
+          "continuousImprovement": "Ce portfolio n'est jamais 'fini.' J'ajoute continuellement de nouveaux projets, raffine le design et expérimente de nouvelles techniques. C'est à la fois une vitrine et un terrain de jeu d'apprentissage."
+        }
       }
     },
     "items": {
