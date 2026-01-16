@@ -1,0 +1,151 @@
+IUT de Lannion
+BUT Informatique
+3ème année
+
+Consignes pour la réalisation du portfolio en 3e année
+Équipe enseignante de 3ème année : Sophie Girard, Anne-Isabelle Llanta, Fabienne Milet et
+Raphaël Durand (conception des supports de cours).
+Maintenant que l’année universitaire a commencé depuis plusieurs semaines, l’équipe
+enseignante du portfolio vous apporte quelques précisions sur les modalités du portfolio pour
+cette année.
+
+Objectif :
+Tout d’abord, l’objectif du portfolio n’a pas changé !
+Vous devez mettre en valeur vos compétences à l’aide d’un support qui vous permet de faire
+la synthèse des 6 compétences du BUT Informatique.
+Vous avez eu jusqu’à présent deux années complètes à l’IUT (cours / Saé / projets) et une
+expérience en milieu professionnel en 2ème année, soit avec un stage, soit avec une alternance.
+Tous ces éléments doivent vous aider à construire votre portfolio.
+
+Volume horaire et planning des séances :
+Concernant le travail à faire, vous n’avez que 2 heures de TD au semestre 5 pour créer,
+améliorer et construire votre portfolio.
+La deuxième heure de cours aura lieu la semaine du 17 novembre. Cette séance vous
+permettra de continuer votre travail. Vous n’aurez plus d’autres heures de préparation en
+cours. Le reste du travail devra se faire en autonomie.
+
+Planning des séances
+
+Durée de la Contenu de la séance
+séance
+Semaine du 29 septembre 1h TD
+Présentation des consignes et début du
+2025
+travail
+Semaine du 17 novembre 1h TD
+Suite du travail
+2025
+Semaine du 12 janvier 2026
+3h TD
+Evaluation orale du Portfolio
+Oral individuel de 5 minutes
+
+P a g e 1|4
+
+Type de réalisation :
+Votre portfolio doit être le reflet de votre personnalité et de vos compétences. Pour le réaliser,
+nous vous recommandons fortement de vous investir pour :
+-
+
+-
+
+Reprendre le site personnel que vous avez fait en 1re année en portfolio et
+l’améliorer
+ou
+Créer un nouveau site
+
+Autres suggestions possibles pour présenter votre Portfolio (à insérer dans votre site ou pour
+accompagner votre site) :
+-
+
+Construire un poster (format A4 ou A3)
+Créer une carte mentale (par exemple avec Xmind)
+Créer un calendrier « Les Dieux du BUT »
+Compléter le profil LinkedIn avec la section compétences (à développer réellement si
+vous choisissez cette option)
+Tout autre support qui vous permet de valoriser vos compétences
+
+Partie technique pour un site :
+Dans le cas où vous décidez de faire un site, et quelle que soit votre parcours (A ou C), il est
+judicieux de le construire en HTML/CSS. L’utilisation d’un outil CMS pour faire votre site
+(WordPress, Wix, etc.) n’est pas la plus pertinente à votre niveau d’études.
+IMPORTANT : après discussion, lors de l’évaluation en janvier, l’équipe pédagogique a décidé
+de vous attribuer une légère pénalité si votre site n’est pas fait en HTML/CSS.
+
+Création d’un CV amélioré :
+Attention à ne pas tomber dans le piège de faire un CV classique. Ici c’est un CV de
+compétences avancé qui vous est demandé. Tout doit être orienté sur les 6 compétences du
+BUT Informatique à l’aide des preuves et expériences (exemples STAR) que vous avez
+archivées avec vous.
+Ainsi, vous mettez principalement en valeur les 6 compétences du BUT Informatique. Vous
+êtes aussi invités à davantage valoriser les 3 compétences spécifiques de parcours. Pour les
+alternants, vous avez la possibilité de focaliser encore plus sur ces 3 compétences de parcours
+en capitalisant sur vos périodes en entreprise. Pour les étudiants en formation initiale, vous
+faites au mieux avec le stage de 2e année et avec d’autres ressources personnelles (travail
+associatif, etc.). Le plus important est que le travail demandé ici reflète votre personnalité, vos
+goûts, votre sensibilité vis-à-vis des 6 compétences.
+
+P a g e 2|4
+
+Adéquation projets / compétences :
+Dans votre réalisation, vous pouvez choisir votre « entrée » dans le portfolio selon votre
+affinité. Ainsi, par exemple, vous pouvez tout à fait présenter un projet (ou plusieurs) dans
+une compétence (voie 1), ou alors décider de panacher un projet sur plusieurs compétences
+(voie 2). Cela dépendra de votre ressenti, de votre parcours (A ou C), de votre cursus (FI ou
+alt) et de ce que vous voulez valoriser.
+Exemple :
+-
+
+Voie 1 : dans l’arborescence de votre portfolio, la compétence est au premier niveau
+puis il y a une déclinaison des projets/travaux/réalisations au deuxième niveau
+Voie 2 : inversion de l’arborescence par rapport à la voie 1 (projet au premier niveau
+et les compétences sont décrites au deuxième niveau)
+
+Attention : contrairement à la première année, vous n’êtes pas obligés de faire apparaître une
+arborescence aussi « scolaire » et détaillée avec les intitulés complets du programme national
+du BUT Informatique. Ici, vous êtes invités à faire seulement apparaître les mots-clés du
+programme, par exemple sous la forme de balises, au niveau des projets et/ou des
+compétences que vous voulez valoriser.
+Voici la liste des mots-clés en lien avec chaque compétence :
+-
+
+Compétence 1 : réaliser
+Compétence 2 : optimiser
+Compétence 3 : administrer
+Compétence 4 : gérer
+Compétence 5 : conduire
+Compétence 6 : collaborer
+
+Evaluation :
+L’évaluation se fera lors d’un unique créneau de 3 heures au début du semestre 6. Elle aura
+lieu la semaine du 12 janvier 2026.
+Votre travail consiste à présenter individuellement à l’enseignant.e votre portfolio sur une
+durée de 5 minutes.
+
+Vous n’avez pas de diaporama à présenter lors de l’évaluation. Seul votre portfolio est
+évalué.
+
+P a g e 3|4
+
+Voici un exemple d’évaluation qui peut vous être proposé par votre enseignant.e :
+
+Vous présentez votre support, uniquement le travail demandé cette année (= pas de
+diaporama), au moment où l’enseignant passera vous voir. Vous aurez d’abord à
+argumenter sur les 6 compétences du BUT informatique de manière générale (environ 1
+min), puis vous focaliserez le reste de votre discours sur les 3 compétences de la 3 e année,
+en évoquant par exemple les projets réalisés et les travaux effectués en entreprise si cela
+vous concerne.
+Dans les dernières secondes, vous êtes invités à faire une ouverture sur l’après-IUT
+(poursuites, d’études, insertion professionnelle, etc.). Si vous voulez montrer l’adéquation
+de la formation de BUT Informatique avec l’après-IUT, ce sera un bonus, mais vous n’y êtes
+pas obligés.
+
+Pour conclure, vos enseignants respectifs de groupes sont à votre écoute en cas de questions
+complémentaires.
+Bon travail à tous,
+
+L’équipe enseignante du portfolio
+
+P a g e 4|4
+
+
