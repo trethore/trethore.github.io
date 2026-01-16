@@ -10,6 +10,7 @@ import {gsap} from '@/lib/gsap';
 
 export default function Projects() {
   const t = useTranslations();
+  const tTags = useTranslations('tags');
   const locale = useLocale();
 
   const projectsRef = useRef<HTMLElement>(null);
@@ -80,35 +81,20 @@ export default function Projects() {
                       {description}
                     </p>
                     <div className="flex flex-wrap gap-2">
-                      {project.tags.map((tag) => {
-                        const tagTranslations: Record<string, string> = {
-                          '#Implement': '#réaliser',
-                          '#Fuzzy': '#flou',
-                          '#Patch': '#correctif',
-                          '#Optimize': '#optimiser',
-                          '#Market': '#marché',
-                          '#Administer': '#administrer',
-                          '#Manage': '#gérer',
-                          '#Collaborate': '#collaborer',
-                        };
-
-                        const displayTag = locale === 'fr' ? (tagTranslations[tag] ?? tag) : tag;
-
-                        return (
-                          <Badge
-                            key={tag}
-                            variant="secondary"
-                            className="bg-background/80 backdrop-blur-sm"
-                          >
-                            {displayTag}
-                          </Badge>
-                        );
-                      })}
+                      {project.tagKeys.map((tagKey) => (
+                        <Badge
+                          key={tagKey}
+                          variant="secondary"
+                          className="bg-background/80 backdrop-blur-sm"
+                        >
+                          {tTags(tagKey)}
+                        </Badge>
+                      ))}
                     </div>
                   </div>
 
                   <div className="flex gap-3 mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    {project.github !== '#' ? (
+                    {project.github && (
                       <button
                         type="button"
                         onClick={(e) => {
@@ -122,7 +108,7 @@ export default function Projects() {
                         <Github className="w-4 h-4" />
                         {t('projects.code')}
                       </button>
-                    ) : null}
+                    )}
                   </div>
                 </div>
               </Link>

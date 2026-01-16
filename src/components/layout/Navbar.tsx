@@ -134,9 +134,9 @@ export default function Navbar() {
           </div>
 
           <div className="flex items-center justify-end gap-2">
-            {SOCIAL_LINKS.map(({href, label, icon: Icon}) => (
+            {SOCIAL_LINKS.map(({href, labelKey, icon: Icon}) => (
               <Button
-                key={label}
+                key={labelKey}
                 variant="ghost"
                 size="icon"
                 className="h-10 w-10"
@@ -146,7 +146,7 @@ export default function Navbar() {
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={label}
+                  aria-label={t(labelKey)}
                 >
                   <Icon className="h-[1.3rem] w-[1.3rem]" />
                 </a>

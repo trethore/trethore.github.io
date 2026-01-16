@@ -110,6 +110,7 @@ function SectionRenderer({
 
 export default function ProjectDetail({ project }: ProjectDetailProps) {
   const t = useTranslations();
+  const tTags = useTranslations('tags');
   const locale = useLocale();
   const containerRef = useRef<HTMLElement>(null);
 
@@ -155,18 +156,6 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
   const title = t(project.titleKey);
   const description = t(project.descriptionKey);
 
-  // tag translation map for french
-  const tagTranslations: Record<string, string> = {
-    '#Implement': '#réaliser',
-    '#Fuzzy': '#flou',
-    '#Patch': '#correctif',
-    '#Optimize': '#optimiser',
-    '#Market': '#marché',
-    '#Administer': '#administrer',
-    '#Manage': '#gérer',
-    '#Collaborate': '#collaborer',
-  };
-
   return (
     <main ref={containerRef} className="min-h-screen py-20">
       {/* gradient background matching project theme */}
@@ -193,20 +182,15 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
 
         {/* tags */}
         <div className="project-tags flex flex-wrap gap-2 mb-12">
-          {project.tags.map((tag) => {
-            const displayTag =
-              locale === 'fr' ? (tagTranslations[tag] ?? tag) : tag;
-
-            return (
-              <Badge
-                key={tag}
-                variant="secondary"
-                className="bg-background/80 backdrop-blur-sm text-sm"
-              >
-                {displayTag}
-              </Badge>
-            );
-          })}
+          {project.tagKeys.map((tagKey) => (
+            <Badge
+              key={tagKey}
+              variant="secondary"
+              className="bg-background/80 backdrop-blur-sm text-sm"
+            >
+              {tTags(tagKey)}
+            </Badge>
+          ))}
         </div>
 
         {/* main content / sections */}
@@ -234,7 +218,7 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
 
         {/* links */}
         <footer className="project-links flex flex-wrap gap-4">
-          {project.github !== '#' && (
+          {project.github && (
             <Button asChild variant="outline" size="lg">
               <a
                 href={project.github}

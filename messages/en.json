@@ -3,6 +3,48 @@
     "title": "Titouan Réthoré - Portfolio",
     "description": "Portfolio of Titouan Réthoré"
   },
+  "tags": {
+    "minecraft": "#Minecraft",
+    "javascript": "#JavaScript",
+    "graaljs": "#GraalJS",
+    "java21": "#Java21",
+    "implement": "#Implement",
+    "rust": "#Rust",
+    "llms": "#LLMs",
+    "fuzzy": "#Fuzzy",
+    "patch": "#Patch",
+    "optimize": "#Optimize",
+    "crypto": "#Crypto",
+    "market": "#Market",
+    "nestjs": "#NestJS",
+    "tailwindcss": "#TailwindCSS",
+    "prisma": "#Prisma",
+    "graphql": "#GraphQL",
+    "administer": "#Administer",
+    "manage": "#Manage",
+    "nextjs": "#NextJS",
+    "react": "#React",
+    "typescript": "#TypeScript",
+    "nextIntl": "#next-intl",
+    "radixui": "#RadixUI",
+    "gsap": "#GSAP",
+    "tui": "#TUI",
+    "kraken": "#Kraken",
+    "ohlcvt": "#OHLCVT",
+    "dataCleaning": "#DataCleaning",
+    "analysis": "#Analysis",
+    "cli": "#CLI",
+    "lead": "#Lead",
+    "python": "#Python",
+    "machineLearning": "#MachineLearning",
+    "postgresql": "#PostgreSQL",
+    "recommendationSystem": "#RecommendationSystem",
+    "optimization": "#Optimization",
+    "dataScience": "#DataScience",
+    "spotifyDataset": "#SpotifyDataset",
+    "scikitLearn": "#Scikit-learn",
+    "collaborate": "#Collaborate"
+  },
   "nav": {
     "about": "About Me",
     "projects": "Projects",
@@ -123,10 +165,10 @@
             "consoleCommands": "The integrated console supports commands like:",
             "cmdHelp": "help - List available commands",
             "cmdList": "list - Show all discovered scripts and their status",
-            "cmdEnable": "enable <script> - Enable a specific script",
-            "cmdDisable": "disable <script> - Disable a specific script",
+            "cmdEnable": "enable '<'script'>' - Enable a specific script",
+            "cmdDisable": "disable '<'script'>' - Disable a specific script",
             "cmdRefresh": "refresh - Reload scripts from disk",
-            "cmdSave": "save <script> - Save a script's configuration"
+            "cmdSave": "save '<'script'>' - Save a script's configuration"
           }
         },
         "opinion": {
@@ -179,6 +221,11 @@
     "messageLabel": "Message",
     "messagePlaceholder": "Your message...",
     "submit": "Send Message"
+  },
+  "social": {
+    "discord": "Discord",
+    "github": "GitHub",
+    "linkedin": "LinkedIn"
   },
   "footer": {
     "linkedin": "LinkedIn",

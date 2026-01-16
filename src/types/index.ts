@@ -5,32 +5,22 @@ export interface Project {
   slug: string;
   titleKey: string;
   descriptionKey: string;
-  tags: string[];
+  tagKeys: string[];
   featured: boolean;
   gradient: string;
-  github: string;
+  github?: string;
   blogPostUrl?: string;
 }
 
 export interface SocialLink {
   href: string;
-  label: string;
+  labelKey: string;
   icon: ComponentType<{ className?: string }>;
 }
 
 export interface NavLink {
   href: string;
   labelKey: string;
-}
-
-export interface AnimationConfig {
-  opacity?: number;
-  x?: number;
-  y?: number;
-  duration: number;
-  delay?: number;
-  stagger?: number;
-  ease: string;
 }
 
 // project content types for detailed project pages

@@ -1,20 +1,17 @@
 import Link from 'next/link';
 import {getTranslations} from 'next-intl/server';
+import {SOCIAL_LINKS} from '@/config';
 
-const SOCIAL_LINKS = [
-  {
-    href: 'https://www.linkedin.com/in/titouan-rethore-1b83132bb/',
-    labelKey: 'linkedin'
-  },
-  {
-    href: 'https://github.com/trethore',
-    labelKey: 'github'
-  }
-] as const;
+// footer only shows github and linkedin (text links, no discord)
+const FOOTER_SOCIAL_KEYS = ['social.github', 'social.linkedin'];
 
 export default async function Footer() {
-  const t = await getTranslations('footer');
+  const t = await getTranslations();
   const currentYear = new Date().getFullYear();
+
+  const footerLinks = SOCIAL_LINKS.filter(
+    (link) => FOOTER_SOCIAL_KEYS.includes(link.labelKey)
+  );
 
   return (
     <footer className="border-t border-border/40 backdrop-blur-sm bg-muted/30 dark:bg-muted/50">
@@ -25,7 +22,7 @@ export default async function Footer() {
           <div className="text-sm font-medium">Titouan Réthoré</div>
 
           <div className="flex-1 flex items-center justify-end gap-4">
-            {SOCIAL_LINKS.map(({href, labelKey}) => (
+            {footerLinks.map(({href, labelKey}) => (
               <Link
                 key={labelKey}
                 href={href}

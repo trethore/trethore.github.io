@@ -3,6 +3,48 @@
     "title": "Titouan Réthoré - Portfolio",
     "description": "Portfolio de Titouan Réthoré"
   },
+  "tags": {
+    "minecraft": "#Minecraft",
+    "javascript": "#JavaScript",
+    "graaljs": "#GraalJS",
+    "java21": "#Java21",
+    "implement": "#réaliser",
+    "rust": "#Rust",
+    "llms": "#LLMs",
+    "fuzzy": "#flou",
+    "patch": "#correctif",
+    "optimize": "#optimiser",
+    "crypto": "#Crypto",
+    "market": "#marché",
+    "nestjs": "#NestJS",
+    "tailwindcss": "#TailwindCSS",
+    "prisma": "#Prisma",
+    "graphql": "#GraphQL",
+    "administer": "#administrer",
+    "manage": "#gérer",
+    "nextjs": "#NextJS",
+    "react": "#React",
+    "typescript": "#TypeScript",
+    "nextIntl": "#next-intl",
+    "radixui": "#RadixUI",
+    "gsap": "#GSAP",
+    "tui": "#TUI",
+    "kraken": "#Kraken",
+    "ohlcvt": "#OHLCVT",
+    "dataCleaning": "#NettoyageDonnées",
+    "analysis": "#Analyse",
+    "cli": "#CLI",
+    "lead": "#conduire",
+    "python": "#Python",
+    "machineLearning": "#MachineLearning",
+    "postgresql": "#PostgreSQL",
+    "recommendationSystem": "#SystèmeRecommandation",
+    "optimization": "#Optimisation",
+    "dataScience": "#DataScience",
+    "spotifyDataset": "#SpotifyDataset",
+    "scikitLearn": "#Scikit-learn",
+    "collaborate": "#collaborer"
+  },
   "nav": {
     "about": "À propos",
     "projects": "Projets",
@@ -123,10 +165,10 @@
             "consoleCommands": "La console intégrée supporte des commandes comme :",
             "cmdHelp": "help - Lister les commandes disponibles",
             "cmdList": "list - Afficher tous les scripts découverts et leur statut",
-            "cmdEnable": "enable <script> - Activer un script spécifique",
-            "cmdDisable": "disable <script> - Désactiver un script spécifique",
+            "cmdEnable": "enable '<'script'>' - Activer un script spécifique",
+            "cmdDisable": "disable '<'script'>' - Désactiver un script spécifique",
             "cmdRefresh": "refresh - Recharger les scripts depuis le disque",
-            "cmdSave": "save <script> - Sauvegarder la configuration d'un script"
+            "cmdSave": "save '<'script'>' - Sauvegarder la configuration d'un script"
           }
         },
         "opinion": {
@@ -179,6 +221,11 @@
     "messageLabel": "Message",
     "messagePlaceholder": "Votre message...",
     "submit": "Envoyer"
+  },
+  "social": {
+    "discord": "Discord",
+    "github": "GitHub",
+    "linkedin": "LinkedIn"
   },
   "footer": {
     "linkedin": "LinkedIn",

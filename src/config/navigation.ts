@@ -11,17 +11,17 @@ export const NAV_LINKS: NavLink[] = [
 export const SOCIAL_LINKS: SocialLink[] = [
   {
     href: 'https://discord.com/users/YOUR_DISCORD_ID',
-    label: 'Discord',
+    labelKey: 'social.discord',
     icon: DiscordIcon,
   },
   {
     href: 'https://github.com/trethore',
-    label: 'GitHub',
+    labelKey: 'social.github',
     icon: Github,
   },
   {
     href: 'https://www.linkedin.com/in/titouan-rethore-1b83132bb/',
-    label: 'LinkedIn',
+    labelKey: 'social.linkedin',
     icon: Linkedin,
   },
 ];

@@ -1,5 +1,6 @@
 'use client';
 
+import {usePathname, useRouter} from 'next/navigation';
 import {useLocale, useTranslations} from 'next-intl';
 import {Button} from '@/components/ui/button';
 import {
@@ -19,13 +20,22 @@ const FLAGS: Record<Locale, string> = {
 export function LocaleSwitcher() {
   const t = useTranslations('locale');
   const currentLocale = useLocale() as Locale;
+  const router = useRouter();
+  const pathname = usePathname();
 
   const handleLocaleChange = (newLocale: string) => {
     if (newLocale === currentLocale) {
       return;
     }
+
+    // persist preference in cookie
     document.cookie = `NEXT_LOCALE=${newLocale};path=/;max-age=31536000`;
-    window.location.href = `/${newLocale}`;
+
+    // replace the locale prefix in the current path (e.g., /en/projects -> /fr/projects)
+    const pathWithoutLocale = pathname.replace(`/${currentLocale}`, '') || '/';
+    const newPath = `/${newLocale}${pathWithoutLocale}`;
+
+    router.push(newPath);
   };
 
   return (
